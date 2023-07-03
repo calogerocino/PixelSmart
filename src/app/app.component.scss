@@ -1,3 +1,28 @@
 body {
   margin: 0;
 }
+
+.main {
+  display: flex;
+  overflow: hidden;
+}
+
+.main .page {
+  min-height: 100vh;
+  background: #f9fafb;
+  width: calc(100% - 240px);
+  margin-left: 240px;
+  display: flex;
+  flex-direction: column;
+  transition: margin 0.1s ease, width 0.1s ease;
+}
+
+.sidebar {
+  width: 240px;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: width 0.1s ease, margin 0.1s ease-out;
+  z-index: 999;
+}
