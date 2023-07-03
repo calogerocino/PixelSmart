@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.loader-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--loaderSize);
+  aspect-ratio: 1;
+  pointer-events: none;
+
+  span {
+    position: absolute;
+    height: var(--pointSize);
+    width: var(--pointSize);
+    border-radius: 50%;
+    background: var(--color);
+    transform: rotate(calc(var(--index) * (360deg / var(--numberOfDots)))) translateY(var(--radius));
+    animation: animate calc((var(--numberOfDots) / 10) * 1s) linear infinite;
+    animation-delay: calc(var(--index) * 0.1s);
+    opacity: 0;
+  }
+}
+
+@keyframes animate {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

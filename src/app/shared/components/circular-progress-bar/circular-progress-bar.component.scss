@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+:host {
+  position: relative;
+  width: 200px;
+  aspect-ratio: 1;
+
+  .block {
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background: black;
+    left: 50%;
+    transform-origin: 0% 100px;
+    transform: rotate(calc(var(--i) * 3.6deg));
+    animation: animate 0.1s linear forwards;
+    animation-delay: calc((var(--i)/40) * 1s);
+    opacity: 0;
+
+    &.selected {
+      background: var(--color);
+      box-shadow: 0 0 15px var(--color), 0 0 30px var(--color);
+    }
+  }
+
+  h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2em;
+    font-weight: 500;
+    text-align: center;
+
+    span {
+      font-weight: 700;
+      font-size: 2.5em;
+    }
+
+    sup {
+      font-weight: 300;
+      font-size: 1.5em;
+    }
+  }
+}
+
+@keyframes animate {
+  to {
+    opacity: 1;
+  }
+}

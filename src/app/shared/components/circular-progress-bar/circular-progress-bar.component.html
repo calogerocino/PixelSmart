@@ -1,0 +1,7 @@
+<h2 [style.color]="color"><span class="counter">{{percentual}}</span><sup>%</sup></h2>
+<div
+  *ngFor="let index of pointers"
+  class="block"
+  [ngClass]="{'selected': index < percentual + 1}"
+  style="--i:{{index}};--color:{{color}}"
+></div>

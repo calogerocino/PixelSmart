@@ -1,0 +1,29 @@
+@import '../../../style/spacings.scss';
+@import '../../../style/colors.scss';
+
+$header-height: 52px;
+
+:host {
+  display: flex;
+  height: $header-height;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: $xxs;
+  margin: $none;
+  padding: $none;
+
+  li {
+    padding: $xxs;
+    border: 1px solid $primary;
+    border-radius: $xxxs;
+
+    a {
+      color: $primary;
+      cursor: pointer;
+    }
+  }
+}
