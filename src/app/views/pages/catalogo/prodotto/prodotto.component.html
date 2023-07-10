@@ -1,0 +1,147 @@
+<form #nuovoprodottoForm="ngForm" (ngSubmit)="onCreaProdotto(nuovoprodottoForm)">
+  <div class="row mb-4">
+    <div class="col-6">
+      <input type="text" class="form-control form-control-lg" placeholder="Titolo prodotto" name="titoloProdotto"
+        ngModel required>
+    </div>
+    <div class="col-3">
+      <input type="text" class="form-control form-control-lg" placeholder="Codice" name="codiceProdotto" ngModel
+        required>
+    </div>
+    <div class="col-3">
+      <button type="submit" class="btn btn-primary" [disabled]="!nuovoprodottoForm.valid">Crea prodotto</button>
+    </div>
+  </div>
+  <ul ngbNav #fillJustifyNav="ngbNav" class="nav-tabs nav-fill">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>Informazioni</a>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="mb-2">Breve descrizione</h5>
+                <div>
+                  <!-- <quill-editor [(ngModel)]="htmlText" placeholder="Inserisci breve descrizione" [modules]="quillConfig"
+                    (onSelectionChanged)="onSelectionChanged($event)" (onContentChanged)="onContentChanged($event)"
+                    name="descrizioneProdotto">
+                  </quill-editor> -->
+
+                  <h5 class="mb-2 mt-4 mb-2">Tag</h5>
+                  <tag-input [(ngModel)]='items' theme="bootstrap" [modelAsStrings]="true" [editable]="true"
+                    name="tagProdotto">
+                  </tag-input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <a ngbNavLink>Prezzi</a>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <h6 class="mb-3">Prezzi vendita</h6>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Prezzo vendita</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="prezzovenditaProdotto" autocomplete="off" suffix=" €"
+                  mask="0000" ngModel required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Imponibile di vendita</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="prezzoimponibileProdotto" autocomplete="off" suffix=" €"
+                  mask="0000" ngModel required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Ricarico</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="ricaricoProdoto" autocomplete="off" suffix=" %"
+                  mask="0000" ngModel required>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <h6 class="mb-3">Prezzi acquisto</h6>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Prezzo acquisto</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="prezzoacquistoProdotto" autocomplete="off" suffix=" €"
+                  mask="0000" ngModel required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Impostazioni IVA</label>
+              <div class="col-sm-9">
+                <ng-select [items]="impIva" bindLabel="ivaacquistoProdotto" bindValue="id" [searchable]="false" [(ngModel)]="selectedIva" [ngModelOptions]="{standalone: true}" ngModel required>
+                </ng-select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Imponibile acquisto</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="imponibileacquistoProdoto" autocomplete="off" suffix=" €"
+                  mask="0000" ngModel required>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <h6 class="mb-3">Spedizione</h6>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Prezzo di spedizione</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="prezzospedizioneProdotto" autocomplete="off" suffix=" €"
+                  mask="0000" ngModel required disabled>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
+      <a ngbNavLink>Fornitori</a>
+      <ng-template ngbNavContent>
+        <h6 class="mb-2">Fornitori</h6>
+        <p>Codici, modello, acquisto.</p>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="4">
+      <a ngbNavLink>Magazzino</a>
+      <ng-template ngbNavContent>
+        <h6 class="mb-2">Magazzino</h6>
+        <p>Unità di misura,Magazzino,Disponibilità,Spedizione,Peso imballaggio,Spese di spedizione.</p>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="5">
+      <a ngbNavLink>Immagini</a>
+      <ng-template ngbNavContent>
+        <h6 class="mb-2">Immagini</h6>
+        <div class="row">
+          <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="card-title">Example</h6>
+                <div class="dropzone" [dropzone]="config" (change)="onUpload($event)" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div>
+                <button class="btn btn-secondary mt-2 d-block ml-auto" (click)="resetDropzoneUploads()">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="6">
+      <a ngbNavLink>Impostazioni</a>
+      <ng-template ngbNavContent>
+        <h6 class="mb-2">Impostazioni</h6>
+        <p>Impostazioni marketplace,Impostazioni magazzino.</p>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="fillJustifyNav" class="border border-top-0 p-3"></div>
+</form>

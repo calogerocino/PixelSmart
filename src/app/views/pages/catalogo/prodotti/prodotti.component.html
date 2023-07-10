@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-header">
+    Catalogo
+    <button type="button" class="btn btn-outline-secondary btn-icon-text right mr-3" disabled>
+      <i class="feather icon-printer btn-icon-prepend"></i>
+      Stampa catalogo
+    </button>
+    <button type="button" class="btn btn-outline-primary btn-icon-text right mr-3" routerLink="/catalogo/prodotto">
+      <i class="feather icon-plus btn-icon-prepend"></i>
+      Nuovo prodotto
+    </button>
+  </div>
+  <div class="card-body">
+    <input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="search()" placeholder="Cerca">
+    <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Codice</th>
+          <th>Titolo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of filteredData">
+          <td>{{ item.id }}</td>
+          <td>{{ item.codice }}</td>
+          <td>{{ item.titolo }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>

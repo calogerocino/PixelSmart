@@ -1,0 +1,48 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { User } from '../models/user.model';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  APIKey = 'AIzaSyDb836132HQAXB6suViTPCIPiGAOt3CzZ4';
+  isLoggedIn: boolean;
+  isAdmin = true;
+  signUpURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.APIKey}`;
+  signInURL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.APIKey}`;
+  user: User;
+  constructor(private http: HttpClient) {}
+
+// UTENTE
+
+  isAuthenticated() {
+    return this.isLoggedIn;
+  }
+
+  isRoleAdmin() {
+    return this.isAdmin;
+  }
+
+  createUser(email: string, id: string, token: string, expirationDate: Date) {
+    this.isLoggedIn = true;
+    this.user = new User(email, id, token, expirationDate);
+  }
+
+  signUp(email: string, password: string) {
+    return this.http.post(this.signUpURL, {
+      email: email,
+      password: password,
+      returnSecureToken: true,
+    });
+  }
+
+  signIn(email: string, password: string) {
+    return this.http.post(this.signInURL, {
+      email: email,
+      password: password,
+      returnSecureToken: true,
+    });
+  }
+
+}
