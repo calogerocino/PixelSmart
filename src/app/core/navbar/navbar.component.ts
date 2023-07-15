@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 import { Router } from "@angular/router";
-import { AuthService } from "src/app/core/guard/auth.service";
+import { AuthService } from "src/app/shared/guard/auth.service";
 
 @Component({
   selector: "app-navbar",

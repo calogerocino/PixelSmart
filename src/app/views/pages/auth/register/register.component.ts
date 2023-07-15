@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthModule } from "../auth.module";
-import { AuthService } from "src/app/core/guard/auth.service";
+import { AuthService } from "src/app/shared/guard/auth.service";
 import { NgForm } from "@angular/forms";
 import Swal from "sweetalert2";
 

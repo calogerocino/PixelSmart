@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from 'src/app/core/guard/auth.service';
+import { AuthService } from 'src/app/shared/guard/auth.service';
 import { NgForm } from '@angular/forms';
 
 @Component({

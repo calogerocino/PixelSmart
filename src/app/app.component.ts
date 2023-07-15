@@ -3,7 +3,7 @@ import { Title } from "@angular/platform-browser";
 import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
 import { filter, map } from "rxjs/operators";
 
-import { AuthService } from "./core/guard/auth.service";
+import { AuthService } from "./shared/guard/auth.service";
 
 @Component({
   selector: "app-root",

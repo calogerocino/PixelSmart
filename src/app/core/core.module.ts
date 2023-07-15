@@ -8,11 +8,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 
-import { ContentAnimateDirective } from '../../core/content-animate/content-animate.directive';
+import { ContentAnimateDirective } from '../shared/content-animate/content-animate.directive';
 
 import { NgbDropdownModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { FeahterIconModule } from '../../core/feather-icon/feather-icon.module';
+import { FeahterIconModule } from '../shared/feather-icon/feather-icon.module';
 
 
 

@@ -5,14 +5,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { LayoutModule } from './views/layout/layout.module';
-import { AuthGuard } from './core/guard/auth.guard';
+import { LayoutModule } from './core/core.module';
+import { AuthGuard } from './shared/guard/auth.guard';
 
 import { AppComponent } from './app.component';
 import { ErrorPageComponent } from './views/pages/error-page/error-page.component';
 
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     LayoutModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    StoreModule.forRoot({}, {})
 
   ],
   providers: [

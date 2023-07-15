@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { FirebaseService } from 'src/app/core/servizi/firebase.service';
+import { FirebaseService } from 'src/app/shared/servizi/firebase.service';
 import {
   DropzoneDirective,
   DropzoneConfigInterface,
