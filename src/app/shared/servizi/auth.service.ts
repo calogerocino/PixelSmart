@@ -6,14 +6,21 @@ import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userData: any; // Save logged in user data
   returnUrl: string;
-
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    timer: 3000,
+    timerProgressBar: true,
+  });
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
@@ -34,7 +41,6 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user')!);
       }
     });
-
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   // Sign in with email/password
@@ -42,7 +48,6 @@ export class AuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log('ciao')
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
@@ -51,7 +56,7 @@ export class AuthService {
         });
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.Toast.fire(error.message, '', 'error');
       });
   }
 
@@ -66,7 +71,7 @@ export class AuthService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.Toast.fire(error.message, '', 'error');
       });
   }
 
@@ -87,7 +92,7 @@ export class AuthService {
         window.alert('Mail reset password inviato, controlla la tua posta.');
       })
       .catch((error) => {
-        window.alert(error);
+        this.Toast.fire(error, '', 'error');
       });
   }
 
@@ -113,7 +118,7 @@ export class AuthService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error);
+        this.Toast.fire(error, '', 'error');
       });
   }
   /* Setting up user data when sign in with username/password,
@@ -138,7 +143,8 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      this.router.navigate(['auth/login']);
+      this.Toast.fire("Sei uscito con successo dall'account", 'info');
     });
   }
 }
