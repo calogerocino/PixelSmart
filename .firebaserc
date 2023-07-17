@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "pixelsmart-6b352": {
+      "hosting": {
+        "PixelSmart1": [
+          "pixelsmart-6b352"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "pixelsmart-6b352"
+  }
+}

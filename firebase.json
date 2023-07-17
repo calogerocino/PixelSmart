@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "PixelSmart1",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

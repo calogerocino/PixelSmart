@@ -14,6 +14,12 @@ import { ErrorPageComponent } from './views/pages/error-page/error-page.componen
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -27,7 +33,12 @@ import { StoreModule } from '@ngrx/store';
     LayoutModule,
     HttpClientModule,
     NgbModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({}, {}),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())
 
   ],
   providers: [

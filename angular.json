@@ -103,6 +103,13 @@
               "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2,
+            "browserTarget": "PixelSmart1:build:production"
+          }
         }
       }
     }
