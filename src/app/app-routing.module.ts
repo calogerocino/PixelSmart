@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BaseComponent } from './core/base/base.component';
 import { AuthGuard } from './shared/guard/auth.guard';
-import { ErrorPageComponent } from './views/pages/error-page/error-page.component';
+import { ErrorPageComponent } from './views/error-page/error-page.component';
 
 
 const routes: Routes = [
-  { path:'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule) },
+  { path:'auth', loadChildren: () => import('./views/auth/auth.module').then(m => m.AuthModule) },
   {
     path: '',
     component: BaseComponent,
@@ -14,23 +14,23 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: () => import('./views/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
         path: 'ordini',
-        loadChildren: () => import('./views/pages/ordini/ordini.module').then(m => m.OrdiniModule)
+        loadChildren: () => import('./views/ordini/ordini.module').then(m => m.OrdiniModule)
       },
       {
         path: 'clienti',
-        loadChildren: () => import('./views/pages/clienti/clienti.module').then(m => m.ClientiModule)
+        loadChildren: () => import('./views/clienti/clienti.module').then(m => m.ClientiModule)
       },
       {
         path: 'catalogo',
-        loadChildren: () => import('./views/pages/catalogo/catalogo.module').then(m => m.CatalogoModule)
+        loadChildren: () => import('./views/catalogo/catalogo.module').then(m => m.CatalogoModule)
       },
       {
         path: 'contabilita',
-        loadChildren: () => import('./views/pages/contabilita/contabilita.module').then(m => m.ContabilitaModule)
+        loadChildren: () => import('./views/contabilita/contabilita.module').then(m => m.ContabilitaModule)
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       // { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }

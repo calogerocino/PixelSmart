@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FirebaseService } from "../../../../shared/servizi/firebase.service";
+import { FirebaseService } from "../../../shared/servizi/firebase.service";
 
 // import Swal from "sweetalert2";
 

@@ -7,9 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { LayoutModule } from './core/core.module';
 import { AuthGuard } from './shared/guard/auth.guard';
+import { AuthService } from "./shared/servizi/auth.service";
 
 import { AppComponent } from './app.component';
-import { ErrorPageComponent } from './views/pages/error-page/error-page.component';
+import { ErrorPageComponent } from './views/error-page/error-page.component';
 
 import { HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -20,6 +21,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 
   ],
   providers: [
+    AuthService,
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
     AuthGuard,
     {
       provide: HIGHLIGHT_OPTIONS,

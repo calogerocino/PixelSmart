@@ -2,9 +2,12 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { Routes, RouterModule } from "@angular/router";
 import { AuthComponent } from "./auth.component";
+
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { VerifyemailComponent } from './verifyemail/verifyemail.component';
 
 const routes: Routes = [
   {
@@ -26,12 +29,22 @@ const routes: Routes = [
         component: RegisterComponent,
         data: { title: "Registrazione" },
       },
+      {
+        path: "resetpassword",
+        component: ResetpasswordComponent,
+        data: { title: "Reset Password" },
+      },
+      {
+        path: "verifyemail",
+        component: VerifyemailComponent,
+        data: { title: "Verifica mail" },
+      },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, AuthComponent],
+  declarations: [LoginComponent, RegisterComponent, AuthComponent,ResetpasswordComponent, VerifyemailComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
