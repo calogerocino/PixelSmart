@@ -14,11 +14,11 @@ export class FirebaseService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   insertDatiDB(url: string, body: {}) {
-    return this.http.post(`${url}?auth=${this.authService.user.token}`, body);
+    return this.http.post(`${url}?auth=${this.authService.user}`, body);
   }
 
   getDatiDB(url: string) {
-    return this.http.get(`${url}.json?auth=${this.authService.user.token}`);
+    return this.http.get(`${url}.json?auth=${this.authService.user}`);
   }
 
   deleteDatiDB(url: string, id: string) {

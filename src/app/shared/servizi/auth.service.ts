@@ -8,6 +8,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -59,6 +60,17 @@ export class AuthService {
         this.Toast.fire(error.message, '', 'error');
       });
   }
+
+  checkAuth(): Observable<User> {
+    return this.afAuth.authState;
+  }
+
+  // login(email: string, password: string): Observable<AuthResponseData> {
+  //   return this.http.post<AuthResponseData>(
+  //     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebase.apiKey}`,
+  //     { email, password, returnSecureToken: true }
+  //   );
+  // }
 
   // Sign up with email/password
   SignUp(email: string, password: string) {

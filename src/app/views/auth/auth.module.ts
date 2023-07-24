@@ -8,6 +8,11 @@ import { AuthComponent } from "./auth.component";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { VerifyemailComponent } from './verifyemail/verifyemail.component';
+import { StoreModule } from "@ngrx/store";
+import {AuthReducer} from './state/auth.reducer';
+import { AUTH_STATE_NAME } from "./state/auth.selector";
+import { EffectsModule } from "@ngrx/effects";
+import { authEffects } from "./state/auth.effects";
 
 const routes: Routes = [
   {
@@ -49,6 +54,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
+    StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),
+    EffectsModule.forFeature([authEffects]),
     ReactiveFormsModule,
   ],
 })
