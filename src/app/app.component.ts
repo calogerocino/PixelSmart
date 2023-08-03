@@ -3,7 +3,7 @@ import { Title } from "@angular/platform-browser";
 import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
 import { filter, map } from "rxjs/operators";
 
-import { AuthService } from "./shared/guard/auth.service";
+// import { AuthService } from "./shared/guard/auth.service";
 
 @Component({
   selector: "app-root",
@@ -14,23 +14,13 @@ export class AppComponent implements OnInit {
   title = "pixel-angular";
 
   constructor(
-    private authService: AuthService,
+    // private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private titleService: Title
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem("user")) {
-      const user = JSON.parse(localStorage.getItem("user"));
-      this.authService.createUser(
-        user.email,
-        user.id,
-        user._token,
-        user._expirationDate
-      );
-    }
-
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {

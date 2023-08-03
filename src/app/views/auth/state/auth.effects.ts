@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { exhaustMap, map } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { loginStart, loginSuccess } from './auth.action';
-import { exhaustMap, map, mergeMap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/shared/servizi/auth.service';
+import { loginStart, loginSuccess } from './auth.action';
 
 @Injectable()
-export class authEffects {
+export class AuthEffects {
   constructor(private actions$: Actions, private authService: AuthService) {}
 
   login$ = createEffect(() => {
@@ -13,8 +13,11 @@ export class authEffects {
       ofType(loginStart),
       exhaustMap((action) => {
         return this.authService.checkAuth().pipe(
-          map((data) => {
-            return loginSuccess();
+          map((data: any) => {
+            console.log('test')
+            console.log(data)
+            const user = this.authService.formatUser(data);
+            return loginSuccess({ user });
           })
         );
       })

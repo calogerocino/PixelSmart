@@ -12,7 +12,7 @@ import { StoreModule } from "@ngrx/store";
 import {AuthReducer} from './state/auth.reducer';
 import { AUTH_STATE_NAME } from "./state/auth.selector";
 import { EffectsModule } from "@ngrx/effects";
-import { authEffects } from "./state/auth.effects";
+import { AuthEffects } from "./state/auth.effects";
 
 const routes: Routes = [
   {
@@ -55,7 +55,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FormsModule,
     StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),
-    EffectsModule.forFeature([authEffects]),
+    EffectsModule.forFeature([AuthEffects]),
     ReactiveFormsModule,
   ],
 })
