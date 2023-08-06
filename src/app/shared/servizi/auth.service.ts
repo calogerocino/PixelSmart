@@ -13,7 +13,7 @@ import { AppState } from 'src/app/shared/app.state';
 import { AuthResponseData } from '../models/AuthResponseData';
 import { User } from '../models/user.model';
 import { User2 } from './user';
-import { loginStart } from 'src/app/views/auth/state/auth.action';
+import { loginSuccess, syncUserLogin } from 'src/app/views/auth/state/auth.action';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +27,7 @@ export class AuthService {
     timer: 3000,
     timerProgressBar: true,
   });
-
+ utente :User2;
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -36,6 +36,8 @@ export class AuthService {
     private route: ActivatedRoute,
     public store: Store<AppState>
   ) {
+
+
     /* Salvataggio dei dati utente in localstorage quando
     effettuato l'accesso e l'impostazione di null quando si è disconnessi */
     this.afAuth.authState.subscribe((user) => {
@@ -43,6 +45,7 @@ export class AuthService {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
+        // this.store.dispatch(syncUserLogin({ user }));
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -58,7 +61,7 @@ export class AuthService {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
-            this.store.dispatch(loginStart({ email, password }));
+            this.store.dispatch(loginSuccess({ user }));
             this.router.navigate([this.returnUrl]);
           }
         });
@@ -167,9 +170,9 @@ export class AuthService {
   // Disconnessione
   SignOut() {
     return this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
+      // localStorage.removeItem('user');
       this.router.navigate(['auth/login']);
-      this.Toast.fire("Sei uscito con successo dall'account", 'info');
+      // this.Toast.fire("Sei uscito con successo dall'account", 'info');
     });
   }
 }

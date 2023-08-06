@@ -1,7 +1,7 @@
-import { User } from "src/app/shared/models/user.model";
+import { User2 } from "../../../shared/servizi/user";
 
 export interface AuthState {
-  user: User | null;
+  user: User2 | null;
 }
 
 export const initialState: AuthState = {

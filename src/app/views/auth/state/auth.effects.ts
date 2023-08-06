@@ -8,19 +8,19 @@ import { loginStart, loginSuccess } from './auth.action';
 export class AuthEffects {
   constructor(private actions$: Actions, private authService: AuthService) {}
 
-  login$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(loginStart),
-      exhaustMap((action) => {
-        return this.authService.checkAuth().pipe(
-          map((data: any) => {
-            console.log('test')
-            console.log(data)
-            const user = this.authService.formatUser(data);
-            return loginSuccess({ user });
-          })
-        );
-      })
-    );
-  });
+  // login$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(loginStart),
+  //     exhaustMap((action) => {
+  //       return this.authService.checkAuth().pipe(
+  //         map((data: any) => {
+  //           console.log('test')
+  //           console.log(data)
+  //           const user = this.authService.formatUser(data);
+  //           return loginSuccess({ user });
+  //         })
+  //       );
+  //     })
+  //   );
+  // });
 }

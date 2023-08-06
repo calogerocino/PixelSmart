@@ -1,7 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from 'src/app/shared/models/user.model';
+import { User2 } from '../../../shared/servizi/user';
+
 export const LOGIN_START = '[auth page] login start';
 export const LOGIN_SUCCESS = '[auth page] login Success';
+export const SYNC_LOGIN = '[auth page] dati utenti sincronizzati';
 export const LOGIN_FAIL = '[auth page] login Fail';
 
 export const loginStart = createAction(
@@ -10,5 +12,9 @@ export const loginStart = createAction(
 );
 export const loginSuccess = createAction(
   LOGIN_SUCCESS,
-  props<{ user: User }>()
+  props<{ user: User2 }>()
+);
+export const syncUserLogin = createAction(
+  SYNC_LOGIN,
+  props<{ user: User2 }>()
 );
