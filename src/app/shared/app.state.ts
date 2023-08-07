@@ -4,11 +4,13 @@ import { AuthReducer } from '../views/auth/state/auth.reducer';
 import { AuthState } from '../views/auth/state/auth.state';
 import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 
-export interface AppState {
+export interface UserState {
   [AUTH_STATE_NAME]: AuthState;
-  router: RouterReducerState;
 }
 
+export interface AppState {
+  router: RouterReducerState;
+}
 export const appReducer = {
   [AUTH_STATE_NAME]: AuthReducer,
   // [AUTH_STATE_NAME]: userReducer,
