@@ -16,19 +16,3 @@ const _authReducer = createReducer(
 export function AuthReducer(state, action) {
   return _authReducer(state, action);
 }
-
-
-const _userReducer = createReducer(
-  initialState,
-  on(syncUserLogin, (state, action) => {
-    console.log(action);
-    return {
-      ...state,
-      user: action.user,
-    };
-  })
-);
-
-export function userReducer(state, action) {
-  return _userReducer(state, action);
-}
