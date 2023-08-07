@@ -1,8 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { AuthService } from '../../shared/servizi/auth.service';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/shared/app.state';
+import { Observable, map } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { UserState } from 'src/app/shared/app.state';
+import { User2 } from 'src/app/shared/servizi/user';
+import { AuthState } from 'src/app/views/auth/state/auth.state';
+import { getUser } from 'src/app/views/auth/state/auth.selector';
 
 @Component({
   selector: 'app-navbar',
@@ -10,13 +14,17 @@ import { AppState } from 'src/app/shared/app.state';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(
+ constructor(
     @Inject(DOCUMENT) private document: Document,
     public authService: AuthService,
-    public store: Store<AppState>
+    private _store: Store<UserState>
   ) {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._store.select(getUser).subscribe( (data) => {
+        console.log(data); // gives "{ template: ['1','2'] }"
+        console.log(data.user.displayName); // already forbidden by typescript because data is of type Pages which is an array
+      });
+       }
 
   toggleSidebar(e: Event) {
     e.preventDefault();

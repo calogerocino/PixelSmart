@@ -1,5 +1,4 @@
 import { Injectable, NgZone } from '@angular/core';
-// import { User } from './user';
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
@@ -13,7 +12,7 @@ import { UserState } from 'src/app/shared/app.state';
 import { AuthResponseData } from '../models/AuthResponseData';
 import { User } from '../models/user.model';
 import { User2 } from './user';
-import { loginSuccess, syncUserLogin } from 'src/app/views/auth/state/auth.action';
+import { loginSuccess } from 'src/app/views/auth/state/auth.action';
 
 @Injectable({
   providedIn: 'root',
@@ -45,7 +44,8 @@ export class AuthService {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
-        // this.store.dispatch(syncUserLogin({ user }));
+        // this.store.dispatch(loginSuccess({ user }));
+        // console.log(user)
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -170,7 +170,7 @@ export class AuthService {
   // Disconnessione
   SignOut() {
     return this.afAuth.signOut().then(() => {
-      // localStorage.removeItem('user');
+     localStorage.removeItem('user');
       this.router.navigate(['auth/login']);
       // this.Toast.fire("Sei uscito con successo dall'account", 'info');
     });

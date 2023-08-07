@@ -1,8 +1,6 @@
-import { exhaustMap, map } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/shared/servizi/auth.service';
-import { loginStart, loginSuccess } from './auth.action';
 
 @Injectable()
 export class AuthEffects {

@@ -5,7 +5,6 @@ import { loginSuccess } from './auth.action';
 const _authReducer = createReducer(
   initialState,
   on(loginSuccess, (state, action) => {
-    console.log(action);
     return {
       ...state,
       user: action.user,
@@ -16,4 +15,3 @@ const _authReducer = createReducer(
 export function AuthReducer(state, action) {
   return _authReducer(state, action);
 }
-
