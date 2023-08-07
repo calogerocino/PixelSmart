@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../shared/servizi/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/shared/app.state';
+import { UserState } from 'src/app/shared/app.state';
 import { loginStart } from '../state/auth.action';
 
 @Component({
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   constructor(
     public authService: AuthService,
-    private store: Store<AppState>
+    private store: Store<UserState>
   ) {}
   ngOnInit(): void {
     this.loginForm = new FormGroup({
