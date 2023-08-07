@@ -9,7 +9,7 @@ import {
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/shared/app.state';
+import { UserState } from 'src/app/shared/app.state';
 import { AuthResponseData } from '../models/AuthResponseData';
 import { User } from '../models/user.model';
 import { User2 } from './user';
@@ -34,7 +34,7 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
     private route: ActivatedRoute,
-    public store: Store<AppState>
+    public store: Store<UserState>
   ) {
 
 
