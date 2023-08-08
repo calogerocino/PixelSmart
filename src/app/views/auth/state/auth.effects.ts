@@ -1,5 +1,5 @@
 import { AuthService } from 'src/app/shared/servizi/auth.service';
-import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
 import { loginStart, loginSuccess } from './auth.action';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
@@ -25,7 +25,6 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(loginStart),
       exhaustMap((action) => {
-        this.router.navigate([this.authService.returnUrl]);
         return this.authService.SignIn(action.email, action.password).pipe(
           map((data) => {
             this.store.dispatch(setLoadingSpinner({ status: false }));
@@ -44,4 +43,16 @@ export class AuthEffects {
       })
     );
   });
+
+  loginRedirect$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(loginSuccess),
+        tap((action) => {
+          this.router.navigate([this.authService.returnUrl]);
+        })
+      );
+    },
+    { dispatch: false }
+  );
 }
