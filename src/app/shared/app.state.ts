@@ -6,14 +6,12 @@ import { AuthState } from '../views/auth/state/auth.state';
 import { SharedState } from './store/shared.state';
 import { SharedReducer } from './store/shared.reducer';
 
-export interface UserState {
+export interface AppState {
+  [SHARED_STATE_NAME]: SharedState;
   [AUTH_STATE_NAME]: AuthState;
 }
 
-export interface AppState {
-  [SHARED_STATE_NAME]: SharedState;
-}
 export const appReducer = {
-  [AUTH_STATE_NAME]: AuthReducer,
   [SHARED_STATE_NAME]: SharedReducer,
+  [AUTH_STATE_NAME]: AuthReducer,
 };
