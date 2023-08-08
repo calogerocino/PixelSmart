@@ -29,6 +29,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appReducer } from './shared/app.state';
 
 @NgModule({
   declarations: [
@@ -43,10 +44,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     HttpClientModule,
     NgbModule,
     EffectsModule.forRoot([]),
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: false, // Restrict extension to log-only mode
+      logOnly: false,
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
