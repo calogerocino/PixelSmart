@@ -3,7 +3,7 @@ import { AuthService } from '../../../shared/servizi/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/app.state';
-import { loginStart } from '../state/auth.action';
+import { autoLogin, loginStart } from '../state/auth.action';
 import { setLoadingSpinner } from 'src/app/shared/store/shared.actions';
 import { Observable } from 'rxjs';
 import { getErrorMessage } from 'src/app/shared/store/shared.selectors';
@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
     });
     this.errorMessage = this.store.select(getErrorMessage)
+    this.store.dispatch(autoLogin())
   }
 
   onLoginSubmit() {

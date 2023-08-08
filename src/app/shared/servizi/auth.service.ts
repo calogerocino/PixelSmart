@@ -21,6 +21,7 @@ import { isAuthenticated } from 'src/app/views/auth/state/auth.selector';
   providedIn: 'root',
 })
 export class AuthService {
+  timeoutInterval: any;
   userData: any; // Save logged in user data
   returnUrl: string;
   Toast = Swal.mixin({
@@ -40,18 +41,20 @@ export class AuthService {
   ) {
     /* Salvataggio dei dati utente in localstorage quando
     effettuato l'accesso e l'impostazione di null quando si è disconnessi */
-    this.afAuth.authState.subscribe((user) => {
-      if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
-        // this.store.dispatch(loginSuccess({ user }));
-        // console.log(user)
-      } else {
-        localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
-      }
-    });
+
+    //MOMENTANEAMENTE DISATTIVATO
+    // this.afAuth.authState.subscribe((user) => {
+    //   if (user) {
+    //     this.userData = user;
+    //     localStorage.setItem('user', JSON.stringify(this.userData));
+    //     JSON.parse(localStorage.getItem('user')!);
+    //     // this.store.dispatch(loginSuccess({ user }));
+    //     // console.log(user)
+    //   } else {
+    //     localStorage.setItem('user', 'null');
+    //     JSON.parse(localStorage.getItem('user')!);
+    //   }
+    // });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   // Accedi con e-mail/password
@@ -85,6 +88,38 @@ export class AuthService {
       default:
         return 'Errore sconosciuto, perfavore riprova';
     }
+  }
+
+  setUserInLocalStorage(user: User) {
+    localStorage.setItem('userData', JSON.stringify(user));
+
+    this.runTimeoutInterval(user);
+  }
+
+  runTimeoutInterval(user: User) {
+    const todaysDate = new Date().getTime();
+    const expirationDate = user.expireDate.getTime();
+    const timeInterval = expirationDate - todaysDate;
+
+    setTimeout(() => {
+      //Funzione autologoaut o rigerei il token
+    }, timeInterval);
+  }
+  getUserFromLocalStorage() {
+    const userDataString = localStorage.getItem('userData');
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      const expirationDate = new Date(userData.expirationDate);
+      const user = new User(
+        userData.email,
+        userData.token,
+        userData.localId,
+        expirationDate
+      );
+      this.runTimeoutInterval(user);
+      return user;
+    }
+    return null;
   }
 
   checkAuth() {

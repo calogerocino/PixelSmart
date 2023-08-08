@@ -30,6 +30,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducer } from './shared/app.state';
+import { AuthEffects } from './views/auth/state/auth.effects';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { appReducer } from './shared/app.state';
     LayoutModule,
     HttpClientModule,
     NgbModule,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({
       logOnly: false,
