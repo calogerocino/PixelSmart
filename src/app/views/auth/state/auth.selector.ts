@@ -3,9 +3,8 @@ import { UserState } from 'src/app/shared/app.state';
 
 export const AUTH_STATE_NAME = 'auth';
 
-export const getUserSelector = createFeatureSelector<UserState>('auth');
+const getUserState = createFeatureSelector<UserState>(AUTH_STATE_NAME);
 
-export const getUser = createSelector(
-  getUserSelector,
-  (state: UserState) => state.auth.user
-);
+export const getUser = createSelector(getUserState, (state: UserState) => {
+  return state.auth.user;
+});

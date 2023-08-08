@@ -5,6 +5,7 @@ import { Observable, map } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { UserState } from 'src/app/shared/app.state';
 import { getUser } from 'src/app/views/auth/state/auth.selector';
+import { User2 } from 'src/app/shared/servizi/user';
 
 @Component({
   selector: 'app-navbar',
@@ -12,17 +13,18 @@ import { getUser } from 'src/app/views/auth/state/auth.selector';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
- constructor(
+  connectedUser: Observable<User2>;
+
+  constructor(
     @Inject(DOCUMENT) private document: Document,
     public authService: AuthService,
-    private _store: Store<UserState>
+    private store: Store<UserState>
   ) {}
   ngOnInit(): void {
-    this._store.select(getUser).subscribe( (data) => {
-        console.log(data);
-        console.log(data.displayName);
-      });
-       }
+    //  this.connectedUser = this.store(getUser).subscribe((data)=> {
+    //   console.log(data)
+    //  });
+  }
 
   toggleSidebar(e: Event) {
     e.preventDefault();

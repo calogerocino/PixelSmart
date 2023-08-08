@@ -12,7 +12,9 @@ import { UserState } from 'src/app/shared/app.state';
 import { AuthResponseData } from '../models/AuthResponseData';
 import { User } from '../models/user.model';
 import { User2 } from './user';
-import { loginSuccess } from 'src/app/views/auth/state/auth.action';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -26,17 +28,15 @@ export class AuthService {
     timer: 3000,
     timerProgressBar: true,
   });
- utente :User2;
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
     private route: ActivatedRoute,
-    public store: Store<UserState>
+    public store: Store<UserState>,
+    private http: HttpClient
   ) {
-
-
     /* Salvataggio dei dati utente in localstorage quando
     effettuato l'accesso e l'impostazione di null quando si è disconnessi */
     this.afAuth.authState.subscribe((user) => {
@@ -54,21 +54,12 @@ export class AuthService {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   // Accedi con e-mail/password
-  SignIn(email: string, password: string) {
-    return this.afAuth
-      .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.SetUserData(result.user);
-        this.afAuth.authState.subscribe((user) => {
-          if (user) {
-            this.store.dispatch(loginSuccess({ user }));
-            this.router.navigate([this.returnUrl]);
-          }
-        });
-      })
-      .catch((error) => {
-        this.Toast.fire(error.message, '', 'error');
-      });
+  SignIn(email: string, password: string): Observable<AuthResponseData> {
+    // this.SetUserData(user);
+    return this.http.post<AuthResponseData>(
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebase.apiKey}`,
+      { email, password, returnSecureToken: true }
+    );
   }
 
   formatUser(data: AuthResponseData) {
@@ -82,6 +73,17 @@ export class AuthService {
       expirationDate
     );
     return user;
+  }
+
+  getErrorMessage(message: string) {
+    switch (message) {
+      case 'EMAIL_NOT_FOUND':
+        return 'Email non trovata';
+      case 'INVALID_PASSWORD':
+        return 'Password non valida';
+      default:
+        return 'Errore sconosciuto, perfavore riprova';
+    }
   }
 
   checkAuth() {
@@ -170,7 +172,7 @@ export class AuthService {
   // Disconnessione
   SignOut() {
     return this.afAuth.signOut().then(() => {
-     localStorage.removeItem('user');
+      localStorage.removeItem('user');
       this.router.navigate(['auth/login']);
       // this.Toast.fire("Sei uscito con successo dall'account", 'info');
     });
