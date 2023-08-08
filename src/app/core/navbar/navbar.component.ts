@@ -4,6 +4,7 @@ import { AuthService } from '../../shared/servizi/auth.service';
 import { Observable, map } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { UserState } from 'src/app/shared/app.state';
+import { getUser } from 'src/app/views/auth/state/auth.selector';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,7 @@ export class NavbarComponent implements OnInit {
     private _store: Store<UserState>
   ) {}
   ngOnInit(): void {
-    this._store.select().subscribe( (data) => {
+    this._store.select(getUser).subscribe( (data) => {
         console.log(data);
         console.log(data.displayName);
       });
