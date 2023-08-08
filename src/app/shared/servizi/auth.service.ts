@@ -128,13 +128,11 @@ export class AuthService {
   }
 
   // Restituisce vero quando l'utente ha effettuato l'accesso e l'e-mail è stata verificata
-  get isLoggedIn(): boolean {
-    // const user = JSON.parse(localStorage.getItem('user')!);
-    const user = this.store.select(isAuthenticated);
-    console.log('user')
-    console.log(user)
-    return user !== null && !false ? true : false;
-  }
+  // get isLoggedIn(): boolean {
+  //   // const user = JSON.parse(localStorage.getItem('user')!);
+  //   const user = this.store.select(isAuthenticated);
+  //   return user != null ? false : true;
+  // }
 
   // Accedi con Google
   GoogleAuth() {
