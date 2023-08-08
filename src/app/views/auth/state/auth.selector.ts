@@ -1,10 +1,16 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { UserState } from 'src/app/shared/app.state';
+import { AuthState } from './auth.state';
 
 export const AUTH_STATE_NAME = 'auth';
 
-const getUserState = createFeatureSelector<UserState>(AUTH_STATE_NAME);
+const getAuthState = createFeatureSelector<AuthState>(AUTH_STATE_NAME);
 
-export const getUser = createSelector(getUserState, (state: UserState) => {
-  return state.auth.user;
+export const isAuthenticated = createSelector(getAuthState, state=> {
+  return state.user ? true : false;
+})
+
+
+
+ export const getUser = createSelector(getAuthState, state => {
+   return state.user;
 });

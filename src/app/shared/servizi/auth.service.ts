@@ -8,13 +8,14 @@ import {
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Store } from '@ngrx/store';
-import { UserState } from 'src/app/shared/app.state';
+import { AppState } from 'src/app/shared/app.state';
 import { AuthResponseData } from '../models/AuthResponseData';
 import { User } from '../models/user.model';
 import { User2 } from './user';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { isAuthenticated } from 'src/app/views/auth/state/auth.selector';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,7 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
     private route: ActivatedRoute,
-    public store: Store<UserState>,
+    public store: Store<AppState>,
     private http: HttpClient
   ) {
     /* Salvataggio dei dati utente in localstorage quando
@@ -128,8 +129,11 @@ export class AuthService {
 
   // Restituisce vero quando l'utente ha effettuato l'accesso e l'e-mail è stata verificata
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false ? true : false;
+    // const user = JSON.parse(localStorage.getItem('user')!);
+    const user = this.store.select(isAuthenticated);
+    console.log('user')
+    console.log(user)
+    return user !== null && !false ? true : false;
   }
 
   // Accedi con Google
