@@ -21,8 +21,9 @@ export class NavbarComponent implements OnInit {
     private store: Store<AppState>
   ) {}
   ngOnInit(): void {
-    this.connectedUser = this.store.select(getUser);
-    console.log(this.connectedUser);
+    this.connectedUser = this.store.select(getUser).pipe(map(data => {
+      return data
+    }));
   }
 
   toggleSidebar(e: Event) {
