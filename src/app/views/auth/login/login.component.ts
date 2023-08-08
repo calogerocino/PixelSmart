@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../shared/servizi/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { UserState } from 'src/app/shared/app.state';
+import { AppState } from 'src/app/shared/app.state';
 import { loginStart } from '../state/auth.action';
+import { setLoadingSpinner } from 'src/app/shared/store/shared.actions';
+import { Observable } from 'rxjs';
+import { getErrorMessage } from 'src/app/shared/store/shared.selectors';
 
 @Component({
   selector: 'app-login',
@@ -12,21 +15,27 @@ import { loginStart } from '../state/auth.action';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  errorMessage: Observable<string>;
+
   constructor(
     public authService: AuthService,
-    private store: Store<UserState>
+    private store: Store<AppState>
   ) {}
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
+    this.errorMessage = this.store.select(getErrorMessage)
   }
 
   onLoginSubmit() {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
+    this.store.dispatch(setLoadingSpinner({ status: true }));
     this.store.dispatch(loginStart({ email, password }));
-    this.authService.SignIn(email, password);
+
+    // this.store.dispatch(loginStart({ email, password }));
+    // this.authService.SignIn(email, password);
   }
 }

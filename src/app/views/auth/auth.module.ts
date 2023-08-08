@@ -5,6 +5,7 @@ import { RegisterComponent } from "./register/register.component";
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { Routes, RouterModule } from "@angular/router";
 import { AuthComponent } from "./auth.component";
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { VerifyemailComponent } from './verifyemail/verifyemail.component';
@@ -13,6 +14,8 @@ import {AuthReducer} from './state/auth.reducer';
 import { AUTH_STATE_NAME } from "./state/auth.selector";
 import { EffectsModule } from "@ngrx/effects";
 import { AuthEffects } from "./state/auth.effects";
+import { SHARED_STATE_NAME } from "src/app/shared/store/shared.selectors";
+import { SharedReducer } from "src/app/shared/store/shared.reducer";
 
 const routes: Routes = [
   {
@@ -49,12 +52,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, AuthComponent,ResetpasswordComponent, VerifyemailComponent],
+  declarations: [LoginComponent, RegisterComponent, AuthComponent,ResetpasswordComponent, VerifyemailComponent,
+    LoadingSpinnerComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
     StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),
+    StoreModule.forFeature(SHARED_STATE_NAME, SharedReducer),
     EffectsModule.forFeature([AuthEffects]),
     ReactiveFormsModule,
   ],
