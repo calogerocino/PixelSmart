@@ -30,14 +30,4 @@ export class NavbarComponent implements OnInit {
     e.preventDefault();
     this.document.body.classList.toggle('sidebar-open');
   }
-
-  // onLogout(e: Event ) {
-  //   e.preventDefault();
-  //   localStorage.removeItem("user");
-  //   this.authService.isLoggedIn = false;
-  //   this.authService.user = null;
-  //   if (!localStorage.getItem("user")) {
-  //     this.router.navigate(["/auth/login"]);
-  //   }
-  // }
 }
