@@ -3,9 +3,9 @@ import { DOCUMENT } from '@angular/common';
 import { AuthService } from '../../shared/servizi/auth.service';
 import { Observable, map } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { UserState } from 'src/app/shared/app.state';
+import { AppState } from 'src/app/shared/app.state';
 import { getUser } from 'src/app/views/auth/state/auth.selector';
-import { User2 } from 'src/app/shared/servizi/user';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -13,17 +13,16 @@ import { User2 } from 'src/app/shared/servizi/user';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  connectedUser: Observable<User2>;
+  connectedUser: Observable<User>;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     public authService: AuthService,
-    private store: Store<UserState>
+    private store: Store<AppState>
   ) {}
   ngOnInit(): void {
-    //  this.connectedUser = this.store(getUser).subscribe((data)=> {
-    //   console.log(data)
-    //  });
+    this.connectedUser = this.store.select(getUser);
+    console.log(this.connectedUser);
   }
 
   toggleSidebar(e: Event) {
