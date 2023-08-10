@@ -15,48 +15,31 @@ import { User2 } from './user';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { isAuthenticated } from 'src/app/views/auth/state/auth.selector';
+import { autologout } from 'src/app/views/auth/state/auth.action';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   timeoutInterval: any;
-  userData: any; // Save logged in user data
-  returnUrl: string;
+  userData: any;
+
   Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     timer: 3000,
     timerProgressBar: true,
   });
+
   constructor(
-    public afs: AngularFirestore, // Inject Firestore service
-    public afAuth: AngularFireAuth, // Inject Firebase auth service
+    public afs: AngularFirestore,
+    public afAuth: AngularFireAuth,
     public router: Router,
-    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    public ngZone: NgZone,
     private route: ActivatedRoute,
     public store: Store<AppState>,
     private http: HttpClient
-  ) {
-    /* Salvataggio dei dati utente in localstorage quando
-    effettuato l'accesso e l'impostazione di null quando si è disconnessi */
-
-    //MOMENTANEAMENTE DISATTIVATO
-    // this.afAuth.authState.subscribe((user) => {
-    //   if (user) {
-    //     this.userData = user;
-    //     localStorage.setItem('user', JSON.stringify(this.userData));
-    //     JSON.parse(localStorage.getItem('user')!);
-    //     // this.store.dispatch(loginSuccess({ user }));
-    //     // console.log(user)
-    //   } else {
-    //     localStorage.setItem('user', 'null');
-    //     JSON.parse(localStorage.getItem('user')!);
-    //   }
-    // });
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-  }
+  ) {}
   // Accedi con e-mail/password
   SignIn(email: string, password: string): Observable<AuthResponseData> {
     // this.SetUserData(user);
@@ -102,7 +85,7 @@ export class AuthService {
     const timeInterval = expirationDate - todaysDate;
 
     setTimeout(() => {
-      //Funzione autologoaut o rigerei il token
+      this.store.dispatch(autologout());
     }, timeInterval);
   }
   getUserFromLocalStorage() {
@@ -121,6 +104,23 @@ export class AuthService {
     }
     return null;
   }
+
+  // Disconnessione
+  SignOut(event: Event) {
+    event.preventDefault();
+    this.store.dispatch(autologout());
+  }
+
+  logoutS() {
+    localStorage.removeItem('userData');
+    this.afAuth.signOut();
+    if (this.timeoutInterval) {
+      clearTimeout(this.timeoutInterval);
+      this.timeoutInterval = null;
+    }
+  }
+
+  //DA SISTEMAE CON NGRX
 
   checkAuth() {
     return this.afAuth.authState;
@@ -172,7 +172,7 @@ export class AuthService {
   // Accedi con Google
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      this.router.navigate([this.returnUrl]);
+      this.router.navigate(['/']);
     });
   }
 
@@ -181,7 +181,7 @@ export class AuthService {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
-        this.router.navigate([this.returnUrl]);
+        this.router.navigate(['/']);
         this.SetUserData(result.user);
       })
       .catch((error) => {
@@ -204,14 +204,6 @@ export class AuthService {
     };
     return userRef.set(userData, {
       merge: true,
-    });
-  }
-  // Disconnessione
-  SignOut() {
-    return this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['auth/login']);
-      // this.Toast.fire("Sei uscito con successo dall'account", 'info');
     });
   }
 }
