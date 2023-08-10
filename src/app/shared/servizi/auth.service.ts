@@ -42,7 +42,6 @@ export class AuthService {
   ) {}
   // Accedi con e-mail/password
   SignIn(email: string, password: string): Observable<AuthResponseData> {
-    // this.SetUserData(user);
     return this.http.post<AuthResponseData>(
       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebase.apiKey}`,
       { email, password, returnSecureToken: true }
@@ -146,7 +145,7 @@ export class AuthService {
     return this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
       .then(() => {
-        this.router.navigate(['verify-email-address']);
+        this.router.navigate(['auth/verifyemail']);
       });
   }
 
@@ -156,6 +155,7 @@ export class AuthService {
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
         window.alert('Mail reset password inviato, controlla la tua posta.');
+        this.router.navigate(['auth/login']);
       })
       .catch((error) => {
         this.Toast.fire(error, '', 'error');

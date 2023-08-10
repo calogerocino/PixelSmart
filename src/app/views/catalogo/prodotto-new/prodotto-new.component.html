@@ -1,0 +1,32 @@
+<div class="row my-4">
+  <div class="col-md-12">
+    <h3>Add Product</h3>
+    <hr />
+    <form [formGroup]="productForm" (ngSubmit)="onAddProduct()">
+      <div class="mb-3">
+        <label>Title</label>
+        <input type="text" class="form-control" formControlName="title" />
+
+        <div *ngIf="productForm.get('title').touched && !productForm.get('title').valid">
+          <!-- <div *ngIf="productForm.get('title').errors.['required']">
+            Title is required
+          </div>
+          <div *ngIf="productForm.get('title').errors.['minlength']">
+            Title should be minimum 6 characters
+          </div> -->
+        </div>
+      </div>
+      <div class="mb-3">
+        <label>Description</label>
+        <textarea class="form-control" formControlName="description"></textarea>
+        <div>{{ showDescriptionErrors() }}</div>
+      </div>
+
+      <div class="my-3">
+        <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">
+          Add Product
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
