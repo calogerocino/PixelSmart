@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -9,7 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //AUTH
 import { AuthGuard } from './shared/guard/auth.guard';
-import { AuthService } from "./shared/servizi/auth.service";
+import { AuthService } from './shared/servizi/auth.service';
 
 import { AppComponent } from './app.component';
 import { ErrorPageComponent } from './views/error-page/error-page.component';
@@ -21,22 +21,20 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 //FIREBASE
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { provideStorage,getStorage } from '@angular/fire/storage';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducer } from './shared/app.state';
 import { AuthEffects } from './views/auth/state/auth.effects';
+import { AuthTokenInterceptor } from './shared/servizi/AuthToken.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ErrorPageComponent
-  ],
+  declarations: [AppComponent, ErrorPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -53,8 +51,7 @@ import { AuthEffects } from './views/auth/state/auth.effects';
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
-
+    provideStorage(() => getStorage()),
   ],
   providers: [
     AuthService,
@@ -68,10 +65,11 @@ import { AuthEffects } from './views/auth/state/auth.effects';
           xml: () => import('highlight.js/lib/languages/xml'),
           typescript: () => import('highlight.js/lib/languages/typescript'),
           scss: () => import('highlight.js/lib/languages/scss'),
-        }
-      }
-    }
+        },
+      },
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
