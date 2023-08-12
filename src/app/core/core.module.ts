@@ -29,4 +29,4 @@ import { FeahterIconModule } from '../shared/feather-icon/feather-icon.module';
   ],
   providers: []
 })
-export class LayoutModule { }
+export class CoreModule { }

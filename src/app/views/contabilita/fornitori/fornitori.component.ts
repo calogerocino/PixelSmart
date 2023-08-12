@@ -14,7 +14,7 @@ export class FornitoriComponent implements OnInit {
   DBRes: any[];
   filteredData: any[];
 
-  constructor(private firebaseService: FirebaseService) {
+  constructor(private readonly firebaseService: FirebaseService) {
     this.fetch((data) => {
       this.dataTableRow = data;
       this.filteredData = data;

@@ -5,5 +5,5 @@ export interface ProductsState {
 }
 
 export const initialState: ProductsState = {
-  products: null,
+  products: [],
 };

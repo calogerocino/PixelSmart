@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
    */
   currentDate: NgbDateStruct;
 
-  constructor(private calendar: NgbCalendar) {}
+  constructor(private readonly calendar: NgbCalendar) {}
 
   ngOnInit(): void {
     this.currentDate = this.calendar.getToday();

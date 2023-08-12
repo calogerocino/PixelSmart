@@ -15,19 +15,23 @@ import { getErrorMessage } from 'src/app/shared/store/shared.selectors';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  errorMessage: Observable<string>;
+  errorMessage$: Observable<string | null> = this.store.select(getErrorMessage);
 
   constructor(
-    public authService: AuthService,
-    private store: Store<AppState>
+    private readonly authService: AuthService,
+    private readonly store: Store<AppState>
   ) {}
+
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
-    this.errorMessage = this.store.select(getErrorMessage)
     this.store.dispatch(autoLogin())
+  }
+
+  googleAuth() {
+    this.authService.GoogleAuth();
   }
 
   onLoginSubmit() {

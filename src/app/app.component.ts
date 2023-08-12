@@ -14,10 +14,9 @@ export class AppComponent implements OnInit {
   title = "pixel-angular";
 
   constructor(
-    // private authService: AuthService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private titleService: Title
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly titleService: Title
   ) {}
 
   ngOnInit(): void {

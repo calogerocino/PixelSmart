@@ -5,11 +5,4 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './scadenze.component.html',
   styleUrls: ['./scadenze.component.scss']
 })
-export class ScadenzeComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class ScadenzeComponent {}

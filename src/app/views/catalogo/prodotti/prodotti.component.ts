@@ -15,11 +15,10 @@ import { deleteProduct, loadProducts } from "../state/catalogo.action";
   styleUrls: ["./prodotti.component.scss"],
 })
 export class ProdottiComponent implements OnInit {
-  products: Observable<Product[]>;
-  constructor(private store: Store<AppState>) {}
+  products$: Observable<Product[]> = this.store.select(getProducts);
+  constructor(private readonly store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.products = this.store.select(getProducts);
     this.store.dispatch(loadProducts());
   }
 

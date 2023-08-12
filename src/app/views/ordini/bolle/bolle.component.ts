@@ -5,11 +5,4 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './bolle.component.html',
   styleUrls: ['./bolle.component.scss']
 })
-export class BolleComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class BolleComponent {}

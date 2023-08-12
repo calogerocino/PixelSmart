@@ -47,8 +47,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, AuthComponent,ResetpasswordComponent, VerifyemailComponent,
-    LoadingSpinnerComponent],
+  declarations: [
+    LoginComponent,
+    RegisterComponent,
+    AuthComponent,
+    ResetpasswordComponent,
+    VerifyemailComponent,
+    LoadingSpinnerComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

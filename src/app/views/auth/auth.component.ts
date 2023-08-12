@@ -9,12 +9,8 @@ import { getLoading } from 'src/app/shared/store/shared.selectors';
   templateUrl: './auth.component.html',
   styleUrls: [],
 })
-export class AuthComponent implements OnInit {
-  showLoading: Observable<boolean>;
+export class AuthComponent {
+  showLoading$: Observable<boolean> = this.store.select(getLoading);
 
-  constructor(private store: Store<AppState>) {}
-
-  ngOnInit() {
-    this.showLoading = this.store.select(getLoading);
-  }
+  constructor(private readonly store: Store<AppState>) {}
 }

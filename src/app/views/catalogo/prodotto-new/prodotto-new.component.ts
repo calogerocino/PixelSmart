@@ -13,7 +13,7 @@ import { AppState } from 'src/app/shared/app.state';
 export class ProdottoNewComponent implements OnInit {
   productForm: FormGroup;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private readonly store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.productForm = new FormGroup({

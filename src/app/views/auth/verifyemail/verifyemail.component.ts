@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from 'src/app/shared/models/user.interface';
 import { AuthService } from '../../../shared/servizi/auth.service';
 
 @Component({
@@ -7,5 +8,13 @@ import { AuthService } from '../../../shared/servizi/auth.service';
   styleUrls: ['./verifyemail.component.scss'],
 })
 export class VerifyemailComponent {
-  constructor(public authService: AuthService) {}
+  user: any; // TODO remove type any
+
+  constructor(private readonly authService: AuthService) {
+    this.user = this.authService.userData;
+  }
+
+  sendVerificationMail() {
+    this.authService.SendVerificationMail();
+  }
 }

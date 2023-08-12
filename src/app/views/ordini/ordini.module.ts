@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from "@angular/router";
 
 import { OrdiniComponent } from "./ordini.component";
-import { OrdiniclientiComponent } from "./ordiniclienti/ordiniclienti.component";
+import { OrdiniClientiComponent } from "./ordini-clienti/ordini-clienti.component";
 import { BolleComponent } from "./bolle/bolle.component";
 import { CarrelliComponent } from "./carrelli/carrelli.component";
 
@@ -19,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: 'ordiniclienti',
-        component: OrdiniclientiComponent,
+        component: OrdiniClientiComponent,
         data: { title: "Ordini" },
       },
       {

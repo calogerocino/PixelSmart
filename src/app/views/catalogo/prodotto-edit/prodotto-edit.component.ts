@@ -18,9 +18,9 @@ export class ProdottoEditComponent implements OnInit, OnDestroy {
   productForm: FormGroup;
   productSubscription: Subscription;
   constructor(
-    private route: ActivatedRoute,
-    private store: Store<AppState>,
-    private router: Router
+    private readonly route: ActivatedRoute,
+    private readonly store: Store<AppState>,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {

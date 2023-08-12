@@ -14,7 +14,7 @@ export class ErrorPageComponent implements OnInit, OnDestroy {
   desc: any;
   private sub: Subscription;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private readonly route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.type = this.route.snapshot.paramMap.get('type');

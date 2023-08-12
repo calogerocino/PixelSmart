@@ -4,7 +4,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
-import { LayoutModule } from './core/core.module';
+import { CoreModule } from './core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //AUTH
@@ -30,16 +30,17 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducer } from './shared/app.state';
-import { AuthEffects } from './views/auth/state/auth.effects';
 import { AuthTokenInterceptor } from './shared/servizi/AuthToken.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthEffects } from './views/auth/state/auth.effects';
 
 @NgModule({
   declarations: [AppComponent, ErrorPageComponent],
   imports: [
     BrowserModule,
+    CoreModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    LayoutModule,
     HttpClientModule,
     NgbModule,
     EffectsModule.forRoot([AuthEffects]),

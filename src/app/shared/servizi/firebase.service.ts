@@ -11,7 +11,7 @@ export class FirebaseService {
   DB_prodotti ="prodotti"
   DB_fornitori ="fornitori"
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private readonly http: HttpClient, private readonly authService: AuthService) {}
 
   insertDatiDB(url: string, body: {}) {
     return this.http.post(`${url}?auth=${this.authService.user}`, body);

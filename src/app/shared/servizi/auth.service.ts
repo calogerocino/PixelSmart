@@ -22,7 +22,7 @@ import { autologout } from 'src/app/views/auth/state/auth.action';
 })
 export class AuthService {
   timeoutInterval: any;
-  userData: any;
+  userData: any; // TODO REMOVE TYPE ANY
 
   Toast = Swal.mixin({
     toast: true,
@@ -37,7 +37,7 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone,
     private route: ActivatedRoute,
-    public store: Store<AppState>,
+    private store: Store<AppState>,
     private http: HttpClient
   ) {}
   // Accedi con e-mail/password

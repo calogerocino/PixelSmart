@@ -14,7 +14,7 @@ import { isAuthenticated } from 'src/app/views/auth/state/auth.selector';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  constructor(private store: Store<AppState>, private router: Router) {}
+  constructor(private readonly store: Store<AppState>, private readonly router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,

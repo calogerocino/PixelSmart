@@ -5,11 +5,4 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './carrelli.component.html',
   styleUrls: ['./carrelli.component.scss']
 })
-export class CarrelliComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class CarrelliComponent {}

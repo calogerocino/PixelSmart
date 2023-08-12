@@ -3,10 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-utente',
   templateUrl: './utente.component.html',
-  styleUrls: []
+  styleUrls: ['./utente.component.scss'],
 })
-export class UtenteComponent {
-
-  constructor() { }
-
-}
+export class UtenteComponent {}

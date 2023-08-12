@@ -5,11 +5,4 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './contabilita.component.html',
   styleUrls: []
 })
-export class ContabilitaComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class ContabilitaComponent {}

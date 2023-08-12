@@ -5,11 +5,4 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './ordini.component.html',
   styleUrls: []
 })
-export class OrdiniComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class OrdiniComponent {}

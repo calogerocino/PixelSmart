@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthTokenInterceptor implements HttpInterceptor {
-  constructor(private store: Store<AppState>) {}
+  constructor(private readonly store: Store<AppState>) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler

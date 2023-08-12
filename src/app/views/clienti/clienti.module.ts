@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from "@angular/router";
 
 import { ClientiComponent } from "./clienti.component";
-import { ListaclientiComponent } from "./listaclienti/listaclienti.component";
+import { ListaClientiComponent } from "./lista-clienti/lista-clienti.component";
 import { ClienteComponent } from "./cliente/cliente.component";
 import { IndirizziComponent } from "./indirizzi/indirizzi.component";
 
@@ -19,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: "listaclienti",
-        component: ListaclientiComponent,
+        component: ListaClientiComponent,
         data: { title: "Lista clienti" },
       },
       {
@@ -36,7 +36,7 @@ const routes: Routes = [
     ClientiComponent,
     ClienteComponent,
     IndirizziComponent,
-    ListaclientiComponent,
+    ListaClientiComponent,
   ],
   imports: [CommonModule, RouterModule.forChild(routes)],
 })

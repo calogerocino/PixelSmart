@@ -6,7 +6,10 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ProductsEffects {
-  constructor(private actions$: Actions, private productsService: ProductsService) {}
+  constructor(
+    private readonly actions$: Actions,
+    private readonly productsService: ProductsService
+  ) {}
 
   loadProducts$ = createEffect(() => {
     return this.actions$.pipe(

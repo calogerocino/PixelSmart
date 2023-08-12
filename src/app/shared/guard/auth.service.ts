@@ -12,7 +12,7 @@ export class AuthService {
   signUpURL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.APIKey}`;
   signInURL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.APIKey}`;
   user: User;
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
 // UTENTE
 

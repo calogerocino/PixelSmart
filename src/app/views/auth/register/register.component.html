@@ -22,10 +22,10 @@
             </div>
             <div class="mt-3">
               <button type="submit" class="btn btn-primary mr-2 mb-2 mb-md-0"
-                (click)="authService.SignUp(userEmail.value, userPwd.value)">Registrati</button>
+                (click)="signUp(userEmail.value, userPwd.value)">Registrati</button>
             </div>
             <div class="mt-3">
-              <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
+              <button type="button" class="btn googleBtn" (click)="googleAuth()">
                 <i class="fab fa-google-plus-g"></i>
                 Continue con Google
               </button>

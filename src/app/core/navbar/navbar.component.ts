@@ -12,19 +12,14 @@ import { User } from 'src/app/shared/models/user.interface';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit {
-  connectedUser: Observable<User>;
+export class NavbarComponent {
+  connectedUser: Observable<User> = this.store.select(getUser);
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     public authService: AuthService,
-    private store: Store<AppState>
+    private readonly store: Store<AppState>
   ) {}
-  ngOnInit(): void {
-    this.connectedUser = this.store.select(getUser).pipe(map(data => {
-      return data
-    }));
-  }
 
   toggleSidebar(e: Event) {
     e.preventDefault();

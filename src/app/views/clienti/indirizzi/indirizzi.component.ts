@@ -5,11 +5,4 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './indirizzi.component.html',
   styleUrls: ['./indirizzi.component.scss']
 })
-export class IndirizziComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class IndirizziComponent {}

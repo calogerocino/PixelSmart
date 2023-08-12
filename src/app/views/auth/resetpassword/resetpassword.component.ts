@@ -7,5 +7,9 @@ import { AuthService } from "../../../shared/servizi/auth.service";
   styleUrls: ['./resetpassword.component.scss']
 })
 export class ResetpasswordComponent {
-constructor( public authService: AuthService) {}
+constructor(private readonly authService: AuthService) {}
+
+forgotPassword(newPassword: string) {
+  this.authService.ForgotPassword(newPassword);
+}
 }
