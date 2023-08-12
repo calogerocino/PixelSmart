@@ -31,19 +31,21 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducer } from './shared/app.state';
 import { AuthTokenInterceptor } from './shared/servizi/AuthToken.interceptor';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthEffects } from './views/auth/state/auth.effects';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, ErrorPageComponent],
   imports: [
     BrowserModule,
-    CoreModule,
+    CommonModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
+    FormsModule,
+    CoreModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     NgbModule,
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([]),
     StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({
       logOnly: false,

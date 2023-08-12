@@ -59,7 +59,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
-    EffectsModule.forFeature(),
+    EffectsModule.forFeature([AuthEffects]),
     ReactiveFormsModule,
   ],
 })

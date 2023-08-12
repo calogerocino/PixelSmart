@@ -26,7 +26,7 @@ import { ProdottoNewComponent } from './prodotto-new/prodotto-new.component';
 import { ProdottoEditComponent } from './prodotto-edit/prodotto-edit.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { ProductsEffects } from './state/catalogo.effects';
+import { CatalogoEffects } from './state/catalogo.effects';
 import { PRODUCT_STATE_NAME } from './state/catalogo.selector';
 import { productsReducer } from './state/catalogo.reducer';
 
@@ -93,7 +93,7 @@ const routes: Routes = [
     NgSelectModule,
     DropzoneModule,
     StoreModule.forFeature(PRODUCT_STATE_NAME, productsReducer),
-    EffectsModule.forFeature([ProductsEffects]),
+    EffectsModule.forFeature([CatalogoEffects]),
   ],
   providers: [
     {

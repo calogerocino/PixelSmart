@@ -13,16 +13,23 @@ import { User } from 'src/app/shared/models/user.interface';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
+  user: any;
   connectedUser: Observable<User> = this.store.select(getUser);
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    public authService: AuthService,
+    private readonly authService: AuthService,
     private readonly store: Store<AppState>
-  ) {}
+  ) {
+    this.user = this.authService.userData;
+  }
 
   toggleSidebar(e: Event) {
     e.preventDefault();
     this.document.body.classList.toggle('sidebar-open');
+  }
+
+  signOut(event: Event) {
+    this.authService.SignOut(event);
   }
 }

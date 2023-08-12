@@ -5,7 +5,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class ProductsEffects {
+export class CatalogoEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly productsService: ProductsService

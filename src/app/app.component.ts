@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
         });
       });
   }
+
   getChild(activatedRoute: ActivatedRoute) {
     if (activatedRoute.firstChild) {
       return this.getChild(activatedRoute.firstChild);
