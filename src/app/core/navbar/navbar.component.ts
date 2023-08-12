@@ -5,7 +5,7 @@ import { Observable, map } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/shared/app.state';
 import { getUser } from 'src/app/views/auth/state/auth.selector';
-import { User } from 'src/app/shared/models/user.model';
+import { User } from 'src/app/shared/models/user.interface';
 
 @Component({
   selector: 'app-navbar',

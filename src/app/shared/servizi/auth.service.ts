@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/app.state';
 import { AuthResponseData } from '../models/AuthResponseData';
-import { User } from '../models/user.model';
+import { User } from '../models/user.interface';
 import { User2 } from './user';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -48,17 +48,14 @@ export class AuthService {
     );
   }
 
-  formatUser(data: AuthResponseData) {
-    const expirationDate = new Date(
-      new Date().getTime() + +data.expiresIn * 1000
-    );
-    const user = new User(
-      data.email,
-      data.idToken,
-      data.localId,
-      expirationDate
-    );
-    return user;
+  formatUser(data: AuthResponseData): User {
+    const now = new Date();
+    return {
+      email: data.email,
+      token: data.idToken,
+      localId: data.localId,
+      expirationDate: new Date(now.getDate() + Number(data.expiresIn) * 1000)
+    };
   }
 
   getErrorMessage(message: string) {
@@ -68,7 +65,7 @@ export class AuthService {
       case 'INVALID_PASSWORD':
         return 'Password non valida';
       default:
-        return 'Errore sconosciuto, perfavore riprova';
+        return 'Errore sconosciuto, per favore riprova';
     }
   }
 
@@ -80,24 +77,25 @@ export class AuthService {
 
   runTimeoutInterval(user: User) {
     const todaysDate = new Date().getTime();
-    const expirationDate = user.expireDate.getTime();
+    const expirationDate = user.expirationDate.getTime();
     const timeInterval = expirationDate - todaysDate;
 
     setTimeout(() => {
       this.store.dispatch(autologout());
     }, timeInterval);
   }
+
   getUserFromLocalStorage() {
     const userDataString = localStorage.getItem('userData');
     if (userDataString) {
       const userData = JSON.parse(userDataString);
       const expirationDate = new Date(userData.expirationDate);
-      const user = new User(
-        userData.email,
-        userData.token,
-        userData.localId,
+      const user: User = {
+        email: userData.email,
+        token: userData.token,
+        localId: userData.localId,
         expirationDate
-      );
+      };
       this.runTimeoutInterval(user);
       return user;
     }

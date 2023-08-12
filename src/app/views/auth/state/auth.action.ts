@@ -1,4 +1,4 @@
-import { User } from 'src/app/shared/models/user.model';
+import { User } from 'src/app/shared/models/user.interface';
 import { createAction, props } from '@ngrx/store';
 
 export const LOGIN_START = '[Auth] Login start';
