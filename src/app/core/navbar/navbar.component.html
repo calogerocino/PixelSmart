@@ -197,9 +197,9 @@
             <div class="figure mb-3">
               <img src="https://via.placeholder.com/80x80" alt="">
             </div>
-            <div class="info text-center"  *ngIf="user">
-              <p class="name font-weight-bold mb-0">{{(user.displayName) ? user.displayName : 'User'}}</p>
-              <p class="email text-muted mb-3">{{user.email}}</p>
+            <div class="info text-center" *ngIf="connectedUser$ | async as userData">
+              <p class="name font-weight-bold mb-0">{{(userData.displayName) ? userData.displayName : 'Utente sconosciuto'}}</p>
+              <p class="email text-muted mb-3">{{userData.email}}</p>
             </div>
           </div>
           <div class="dropdown-body">
