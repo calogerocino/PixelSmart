@@ -10,9 +10,7 @@ import { AuthService } from '../../../shared/servizi/auth.service';
 export class VerifyemailComponent {
   user: any; // TODO remove type any
 
-  constructor(private readonly authService: AuthService) {
-    this.user = this.authService.userData;
-  }
+  constructor(private readonly authService: AuthService) {}
 
   sendVerificationMail() {
     this.authService.SendVerificationMail();

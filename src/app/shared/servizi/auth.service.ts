@@ -11,18 +11,16 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/app.state';
 import { AuthResponseData } from '../models/AuthResponseData';
 import { User } from '../models/user.interface';
-import { User2 } from './user';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { autologout } from 'src/app/views/auth/state/auth.action';
-
+import { getUserlocalId } from 'src/app/views/auth/state/auth.selector';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   timeoutInterval: any;
-  userData: any; // TODO REMOVE TYPE ANY
 
   Toast = Swal.mixin({
     toast: true,
@@ -36,10 +34,10 @@ export class AuthService {
     public afAuth: AngularFireAuth,
     public router: Router,
     public ngZone: NgZone,
-    private route: ActivatedRoute,
     private store: Store<AppState>,
     private http: HttpClient
-  ) {}
+  ) {console.log(this.GetUserDataFireBase())}
+
   // Accedi con e-mail/password
   SignIn(email: string, password: string): Observable<AuthResponseData> {
     return this.http.post<AuthResponseData>(
@@ -54,7 +52,7 @@ export class AuthService {
       email: data.email,
       token: data.idToken,
       localId: data.localId,
-      expirationDate: new Date(now.getDate() + Number(data.expiresIn) * 1000)
+      expirationDate: new Date(now.getDate() + Number(data.expiresIn) * 1000),
     };
   }
 
@@ -94,7 +92,7 @@ export class AuthService {
         email: userData.email,
         token: userData.token,
         localId: userData.localId,
-        expirationDate
+        expirationDate,
       };
       this.runTimeoutInterval(user);
       return user;
@@ -117,6 +115,31 @@ export class AuthService {
     }
   }
 
+  /* Impostazione dei dati utente quando si accede con nome utente/password,
+  registrati con username/password e accedi con social auth
+  provider nel database Firestore utilizzando il servizio AngularFirestore + AngularFirestoreDocument */
+  SetUserData(user: User) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.localId}`
+    );
+    const userData: User = {
+      email: user.email,
+      token: user.token,
+      localId: user.localId,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+    };
+    return userRef.set(userData, {
+      merge: true,
+    });
+  }
+
+  GetUserDataFireBase() {
+    return this.afs.firestore
+      .doc(`users/${this.getUserFromLocalStorage().localId}`)
+      .get();
+  }
+
   //DA SISTEMAE CON NGRX
 
   checkAuth() {
@@ -131,7 +154,7 @@ export class AuthService {
         /* Chiama la funzione SendVerificaitonMail()  quando un nuovo utente si registra
         su e restituisce la promessa */
         this.SendVerificationMail();
-        this.SetUserData(result.user);
+        // this.SetUserData(result.user);
       })
       .catch((error) => {
         this.Toast.fire(error.message, '', 'error');
@@ -180,28 +203,10 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result) => {
         this.router.navigate(['/']);
-        this.SetUserData(result.user);
+        // this.SetUserData(result.user);
       })
       .catch((error) => {
         this.Toast.fire(error, '', 'error');
       });
-  }
-  /* Impostazione dei dati utente quando si accede con nome utente/password,
-  registrati con username/password e accedi con social auth
-  provider nel database Firestore utilizzando il servizio AngularFirestore + AngularFirestoreDocument */
-  SetUserData(user: any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
-    const userData: User2 = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-    };
-    return userRef.set(userData, {
-      merge: true,
-    });
   }
 }

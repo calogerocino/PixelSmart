@@ -1,8 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { AuthService } from '../../shared/servizi/auth.service';
 import { Observable, map } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/app.state';
 import { getUser } from 'src/app/views/auth/state/auth.selector';
 import { User } from 'src/app/shared/models/user.interface';
@@ -13,16 +13,14 @@ import { User } from 'src/app/shared/models/user.interface';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  user: any;
-  connectedUser: Observable<User> = this.store.select(getUser);
+  connectedUser$: Observable<User> = this.store.select(getUser);
+  userLocalId;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private readonly authService: AuthService,
     private readonly store: Store<AppState>
-  ) {
-    this.user = this.authService.userData;
-  }
+  ) {}
 
   toggleSidebar(e: Event) {
     e.preventDefault();
