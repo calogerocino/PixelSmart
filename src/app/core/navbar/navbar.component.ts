@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { AuthService } from '../../shared/servizi/auth.service';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/app.state';
 import { getUser } from 'src/app/views/auth/state/auth.selector';
@@ -14,7 +14,6 @@ import { User } from 'src/app/shared/models/user.interface';
 })
 export class NavbarComponent {
   connectedUser$: Observable<User> = this.store.select(getUser);
-  userLocalId;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,

@@ -10,3 +10,5 @@ export const isAuthenticated = createSelector(getAuthState, (state) => !!state.u
 export const getUser = createSelector(getAuthState, (state) => state.user);
 
 export const getUserToken = createSelector(getAuthState, (state) => state.user?.token);
+
+export const getUserlocalId = createSelector(getAuthState, (state) => state.user.localId);
