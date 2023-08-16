@@ -63,11 +63,12 @@ const routes: Routes = [
       {
         path: 'prodotto',
         component: ProdottoNewComponent,
-        data: { title: 'Prodotto' },
+        data: { title: 'Crea prodotto' },
       },
       {
         path: 'edit/:id',
         component: ProdottoEditComponent,
+        data: { title: 'Modifica prodotto' },
       },
     ],
   },

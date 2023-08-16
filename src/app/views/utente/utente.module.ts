@@ -22,7 +22,7 @@ const routes: Routes = [
         data: { title: 'Gestisci utenti' },
       },
       {
-        path: 'profilo',
+        path: 'profilo/:id',
         component: ProfiloComponent,
         data: { title: 'Profilo' },
       },
