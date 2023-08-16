@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule,
+} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -33,6 +37,12 @@ import { appReducer } from './shared/app.state';
 import { AuthTokenInterceptor } from './shared/servizi/AuthToken.interceptor';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [AppComponent, ErrorPageComponent],
@@ -43,6 +53,13 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     CoreModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     BrowserAnimationsModule,
     NgbModule,
     EffectsModule.forRoot([]),

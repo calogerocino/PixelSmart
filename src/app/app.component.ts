@@ -1,23 +1,27 @@
-import { Component, OnInit } from "@angular/core";
-import { Title } from "@angular/platform-browser";
-import { Router, NavigationEnd, ActivatedRoute } from "@angular/router";
-import { filter, map } from "rxjs/operators";
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { filter, map } from 'rxjs/operators';
 
 // import { AuthService } from "./shared/guard/auth.service";
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = "pixel-angular";
+  title = 'pixel-angular';
 
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly titleService: Title
-  ) {}
+    private readonly titleService: Title,
+    private readonly translate: TranslateService
+  ) {
+    this.translate.setDefaultLang('it');
+  }
 
   ngOnInit(): void {
     this.router.events
@@ -25,8 +29,8 @@ export class AppComponent implements OnInit {
       .subscribe(() => {
         var rt = this.getChild(this.activatedRoute);
 
-        rt.data.subscribe((data: { title: string; }) => {
-          this.titleService.setTitle(data.title + " • PixelSmart");
+        rt.data.subscribe((data: { title: string }) => {
+          this.titleService.setTitle(data.title + ' • PixelSmart');
         });
       });
   }
@@ -37,5 +41,9 @@ export class AppComponent implements OnInit {
     } else {
       return activatedRoute;
     }
+  }
+
+  switchLanguage(language: string) {
+    this.translate.use(language);
   }
 }

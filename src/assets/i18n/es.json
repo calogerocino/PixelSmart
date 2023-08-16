@@ -1,0 +1,13 @@
+{
+	"profiloUtente.profilo.cellulare": "Teléfono móvil",
+	"profiloUtente.profilo.cellulare-set": "Entrega a definir",
+	"profiloUtente.profilo.email": "E-mail",
+	"profiloUtente.profilo.email-set": "Correo electrónico para configurar",
+	"profiloUtente.profilo.indirizzo": "Dirección",
+	"profiloUtente.profilo.indirizzo-set": "Dirección a configurar",
+	"profiloUtente.profilo.inviamessaggio": "Enviar mensaje",
+	"profiloUtente.profilo.nome": "Nombre",
+	"profiloUtente.profilo.nome-set": "Nombre a configurar",
+	"profiloUtente.profilo.ruolo": "Papel",
+	"profiloUtente.profilo.ruolo-set": "Rol a establecer"
+}
