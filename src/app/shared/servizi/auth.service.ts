@@ -13,7 +13,7 @@ import { AuthResponseData } from '../models/AuthResponseData';
 import { User } from '../models/user.interface';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, map } from 'rxjs';
 import { autologout } from 'src/app/views/auth/state/auth.action';
 import { getUserlocalId } from 'src/app/views/auth/state/auth.selector';
 @Injectable({
@@ -36,7 +36,7 @@ export class AuthService {
     public ngZone: NgZone,
     private store: Store<AppState>,
     private http: HttpClient
-  ) {console.log(this.GetUserDataFireBase())}
+  ) {}
 
   // Accedi con e-mail/password
   SignIn(email: string, password: string): Observable<AuthResponseData> {
@@ -113,31 +113,6 @@ export class AuthService {
       clearTimeout(this.timeoutInterval);
       this.timeoutInterval = null;
     }
-  }
-
-  /* Impostazione dei dati utente quando si accede con nome utente/password,
-  registrati con username/password e accedi con social auth
-  provider nel database Firestore utilizzando il servizio AngularFirestore + AngularFirestoreDocument */
-  SetUserData(user: User) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.localId}`
-    );
-    const userData: User = {
-      email: user.email,
-      token: user.token,
-      localId: user.localId,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-    };
-    return userRef.set(userData, {
-      merge: true,
-    });
-  }
-
-  GetUserDataFireBase() {
-    return this.afs.firestore
-      .doc(`users/${this.getUserFromLocalStorage().localId}`)
-      .get();
   }
 
   //DA SISTEMAE CON NGRX

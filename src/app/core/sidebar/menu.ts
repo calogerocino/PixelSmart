@@ -93,7 +93,7 @@ export const MENU: MenuItem[] = [
   {
     label: 'Lista utenti',
     icon: 'users',
-    link: '/utenti',
+    link: '/utente/utenti',
   },
 //   {
 //     label: 'Web Apps',

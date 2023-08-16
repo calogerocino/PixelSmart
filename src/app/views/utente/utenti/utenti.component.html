@@ -1,1 +1,32 @@
-<p>utenti works!</p>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Lista utenti</h3>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Immagine</th>
+          <th>Nome</th>
+          <th>Mail verificata</th>
+          <th>uId</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ffl of fflist">
+          <td> <img [src]="ffl.ffdata.photoURL" alt=""></td>
+          <td>{{ ffl.ffdata.displayName }}</td>
+          <td>{{ ffl.ffdata.emailVerified }}</td>
+          <td>{{ ffl.id }}</td>
+          <td>
+            <a href="" class="btn btn-primary" [routerLink]="['/utente/profilo' , ffl.id]">Modifica</a>&nbsp;
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>
