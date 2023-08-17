@@ -10,7 +10,8 @@
             <i class="feather icon-search"></i>
           </div>
         </div>
-        <input type="text" class="form-control" id="navbarForm" placeholder="Esegui ricerca...">
+        <input type="text" class="form-control" id="navbarForm"
+          placeholder="{{'generale.layout.navbar.eseguiricerca' | translate}}">
       </div>
     </form>
     <ul class="navbar-nav">
@@ -44,27 +45,27 @@
         </a>
         <div ngbDropdownMenu aria-labelledby="appsDropdown">
           <div class="dropdown-header d-flex align-items-center justify-content-between">
-            <p class="mb-0 font-weight-medium">Accessi rapidi</p>
-            <a href="" (click)="false" class="text-muted">Edit</a>
+            <p class="mb-0 font-weight-medium">{{'generale.layout.navbar.accessirapidi' | translate}}</p>
+            <a href="" (click)="false" class="text-muted">{{'generale.shared.modifica' | translate}}</a>
           </div>
           <div class="dropdown-body">
             <div class="d-flex align-items-center apps">
               <a routerLink="/apps/chat"><i class="feather icon-message-square"></i>
-                <p>Lista ordini</p>
+                <p>{{'generale.layout.menu.ordini.listaordini' | translate}}</p>
               </a>
               <a routerLink="/apps/calendar"><i class="feather icon-calendar"></i>
-                <p>Contabilità</p>
+                <p>{{'generale.layout.menu.contabilita.contabilita' | translate}}</p>
               </a>
               <a routerLink="/apps/email/inbox"><i class="feather icon-mail"></i>
-                <p>Email</p>
+                <p>{{'profiloUtente.email' | translate}}</p>
               </a>
               <a routerLink="/general/profile"><i class="feather icon-instagram"></i>
-                <p>Profilo</p>
+                <p>{{'profiloUtente.profilo' | translate}}</p>
               </a>
             </div>
           </div>
           <div class="dropdown-footer d-flex align-items-center justify-content-center">
-            <a href="" (click)="false">Visualizza tutti</a>
+            <a href="" (click)="false">{{'generale.layout.navbar.visualizzatutti' | translate}}</a>
           </div>
         </div>
       </li>
@@ -74,8 +75,8 @@
         </a>
         <div ngbDropdownMenu aria-labelledby="messageDropdown">
           <div class="dropdown-header d-flex align-items-center justify-content-between">
-            <p class="mb-0 font-weight-medium"> nuove mail</p>
-            <a href="" (click)="false" class="text-muted">Elimina tutti</a>
+            <p class="mb-0 font-weight-medium">{{'generale.layout.navbar.nuovemail' | translate}}</p>
+            <a href="" (click)="false" class="text-muted">{{'generale.layout.navbar.eliminatutti' | translate}}</a>
           </div>
           <div class="dropdown-body">
             <!-- <a href="" (click)="false" class="dropdown-item">
@@ -140,7 +141,7 @@
             </a> -->
           </div>
           <div class="dropdown-footer d-flex align-items-center justify-content-center">
-            <a href="" (click)="false">Visualizza tutti</a>
+            <a href="" (click)="false">{{'generale.layout.navbar.visualizzatutti' | translate}}</a>
           </div>
         </div>
       </li>
@@ -153,8 +154,8 @@
         </a>
         <div ngbDropdownMenu aria-labelledby="notificationDropdown">
           <div class="dropdown-header d-flex align-items-center justify-content-between">
-            <p class="mb-0 font-weight-medium">Nuove notifiche</p>
-            <a href="" (click)="false" class="text-muted">Elimina tutti</a>
+            <p class="mb-0 font-weight-medium">{{'generale.layout.navbar.nuovenotifiche' | translate}}</p>
+            <a href="" (click)="false" class="text-muted">{{'generale.layout.navbar.eliminatutti' | translate}}</a>
           </div>
           <div class="dropdown-body">
             <!-- <a href="" (click)="false" class="dropdown-item">
@@ -204,7 +205,7 @@
             </a> -->
           </div>
           <div class="dropdown-footer d-flex align-items-center justify-content-center">
-            <a href="" (click)="false">Visualizza tutti</a>
+            <a href="" (click)="false">{{'generale.layout.navbar.visualizzatutti' | translate}}</a>
           </div>
         </div>
       </li>
@@ -218,47 +219,46 @@
               <img src="https://via.placeholder.com/80x80" alt="">
             </div>
             <div class="info text-center" *ngIf="connectedUser$ | async as userData">
-              <p class="name font-weight-bold mb-0">{{(userData.displayName) ? userData.displayName : 'Utente
-                sconosciuto'}}</p>
+              <p class="name font-weight-bold mb-0">{{(userData.displayName) ? userData.displayName : 'profiloUtente.nome-set' | translate}}</p>
               <p class="email text-muted mb-3">{{userData.email}}</p>
             </div>
           </div>
           <div class="dropdown-body">
             <ul class="profile-nav p-0 pt-3">
-              <li class="nav-item">
-                <a routerLink="/general/profile" class="nav-link">
+              <li class="nav-item" *ngIf="connectedUser$ | async as userData">
+                <a routerLink="/utente/profilo/{{userData.localId}}" class="nav-link">
                   <i class="feather icon-user"></i>
-                  <span>Profilo</span>
+                  <span>{{'profiloUtente.profilo' | translate}}</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="" (click)="false" class="nav-link">
                   <i class="feather icon-globe"></i>
-                  <span>Azienda</span>
+                  <span>{{'generale.layout.navbar.datiazienda' | translate}}</span>
                 </a>
               </li>
               <li class="nav-item" style="border-bottom: 1px solid #f2f4f9;">
                 <a href="" (click)="false" class="nav-link">
                   <i class="feather icon-activity"></i>
-                  <span>Attività</span>
+                  <span>{{'generale.layout.navbar.attivita' | translate}}</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="" (click)="false" class="nav-link">
                   <i class="feather icon-database"></i>
-                  <span>Database</span>
+                  <span>{{'generale.layout.navbar.database' | translate}}</span>
                 </a>
               </li>
               <li class="nav-item" style="border-bottom: 1px solid #f2f4f9;">
                 <a href="" (click)="false" class="nav-link">
                   <i class="feather icon-settings"></i>
-                  <span>Impostazioni</span>
+                  <span>{{'generale.layout.navbar.impostazioni' | translate}}</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="" (click)="signOut($event)" class="nav-link">
                   <i class="feather icon-log-out"></i>
-                  <span>Esci</span>
+                  <span>{{'generale.layout.navbar.esci' | translate}}</span>
                 </a>
               </li>
             </ul>

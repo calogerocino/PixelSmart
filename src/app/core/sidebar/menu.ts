@@ -2,96 +2,96 @@ import { MenuItem } from './menu.model';
 
 export const MENU: MenuItem[] = [
   {
-    label: 'Main',
+    label: 'generale.layout.menu.main',
     isTitle: true
   },
   {
-    label: 'Dashboard',
+    label: 'generale.layout.menu.dashboard',
     icon: 'home',
     link: '/dashboard'
   },
   {
-    label: 'Vendita',
+    label: 'generale.layout.menu.vendita',
     isTitle: true
   },
   {
-    label: 'Ordini',
+    label: 'generale.layout.menu.ordini.ordini',
     icon: 'shopping-cart',
     subItems: [
       {
-        label: 'Ordini clienti',
+        label: 'generale.layout.menu.ordini.ordini',
         link: '/ordini/ordiniclienti',
       },
       {
-        label: 'Bolle di consegna',
+        label: 'generale.layout.menu.ordini.bollediconsegna',
         link: '/ordini/bolle',
       },
       {
-        label: 'Carrello della spesa',
+        label: 'generale.layout.menu.ordini.carrellodellaspesa',
         link: '/ordini/carrelli',
       },
     ]
   },
   {
-    label: 'Catalogo',
+    label: 'generale.layout.menu.catalogo.catalogo',
     icon: 'package',
     subItems: [
       {
-        label: 'Prodotti',
+        label: 'generale.layout.menu.catalogo.prodotti',
         link: '/catalogo/prodotti',
       },
       {
-        label: 'Categorie',
+        label: 'generale.layout.menu.catalogo.categorie',
         link: '/catalogo/categorie',
       },
       {
-        label: 'Marche e fornitori',
+        label: 'generale.layout.menu.catalogo.marche',
         link: '/catalogo/marche',
       },
       {
-        label: 'Buoni sconto',
+        label: 'generale.layout.menu.catalogo.buonisconto',
         link: '/catalogo/buonisconto',
       },
     ]
   },
   {
-    label: 'Clienti',
+    label: 'generale.layout.menu.clienti.clienti',
     icon: 'users',
     subItems: [
       {
-        label: 'Clienti',
+        label: 'generale.layout.menu.clienti.clienti',
         link: '/clienti/listaclienti',
       },
       {
-        label: 'Indirizzi',
+        label: 'generale.layout.menu.clienti.indirizzi',
         link: '/clienti/indirizzi',
       },
     ]
   },
   {
-    label: 'Amministrazine',
+    label: 'generale.layout.menu.contabilita.amministrazione',
     isTitle: true
   },
   {
-    label: 'Contabilità',
+    label: 'generale.layout.menu.contabilita.contabilita',
     icon: 'credit-card',
     subItems: [
       {
-        label: 'Fornitori',
+        label: 'generale.layout.menu.contabilita.fornitori',
         link: '/contabilita/fornitori',
       },
       {
-        label: 'Fatture',
+        label: 'generale.layout.menu.contabilita.fatture',
         link: '/contabilita/fatture',
       },
       {
-        label: 'Scadenze',
+        label: 'generale.layout.menu.contabilita.scadenze',
         link: '/contabilita/scadenze',
       },
     ]
   },
   {
-    label: 'Lista utenti',
+    label: 'generale.layout.menu.listautenti',
     icon: 'users',
     link: '/utente/utenti',
   },
