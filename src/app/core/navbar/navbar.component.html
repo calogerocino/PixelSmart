@@ -14,18 +14,30 @@
       </div>
     </form>
     <ul class="navbar-nav">
-      <!-- <li class="nav-item" ngbDropdown>
+      <li class="nav-item" ngbDropdown>
         <a class="nav-link" ngbDropdownToggle id="languageDropdown" role="button">
-          <i class="flag-icon flag-icon-us mt-1" title="us"></i> <span class="font-weight-medium ml-1 mr-1 d-none d-md-inline-block">English</span>
+          <i class="flag-icon flag-icon-{{this.currentLang()}} mt-1"></i> <span
+            class="font-weight-medium ml-1 mr-1 d-none d-md-inline-block">{{'generale.layout.lingua' |
+            translate}}</span>
         </a>
         <div ngbDropdownMenu aria-labelledby="languageDropdown">
-          <a ngbDropdownItem class="py-2"><i class="flag-icon flag-icon-us" title="us" id="us"></i> <span class="ml-1"> English </span></a>
-          <a ngbDropdownItem class="py-2"><i class="flag-icon flag-icon-fr" title="fr" id="fr"></i> <span class="ml-1"> French </span></a>
-          <a ngbDropdownItem class="py-2"><i class="flag-icon flag-icon-de" title="de" id="de"></i> <span class="ml-1"> German </span></a>
-          <a ngbDropdownItem class="py-2"><i class="flag-icon flag-icon-pt" title="pt" id="pt"></i> <span class="ml-1"> Portuguese </span></a>
-          <a ngbDropdownItem class="py-2"><i class="flag-icon flag-icon-es" title="es" id="es"></i> <span class="ml-1"> Spanish </span></a>
+          <a ngbDropdownItem class="py-2" (click)="this.switchLanguage($event.target)" id="it"><i
+              class="flag-icon flag-icon-it mr-1"></i>
+            Italiano</a>
+          <a ngbDropdownItem class="py-2" (click)="this.switchLanguage($event.target)" id="en"><i
+              class="flag-icon flag-icon-us mr-1"></i>
+            English </a>
+          <a ngbDropdownItem class="py-2" (click)="this.switchLanguage($event.target)" id="fr"><i
+              class="flag-icon flag-icon-fr mr-1"></i>
+            Français</a>
+          <a ngbDropdownItem class="py-2" (click)="this.switchLanguage($event.target)" id="es"><i
+              class="flag-icon flag-icon-es mr-1"></i>
+            Español</a>
+          <a ngbDropdownItem class="py-2" (click)="this.switchLanguage($event.target)" id="de"><i
+              class="flag-icon flag-icon-de mr-1"></i>
+            Deutsch</a>
         </div>
-      </li> -->
+      </li>
       <li class="nav-item nav-apps" ngbDropdown>
         <a class="nav-link" ngbDropdownToggle id="appsDropdown">
           <i class="link-icon feather icon-grid"></i>
@@ -37,10 +49,18 @@
           </div>
           <div class="dropdown-body">
             <div class="d-flex align-items-center apps">
-              <a routerLink="/apps/chat"><i class="feather icon-message-square"></i><p>Lista ordini</p></a>
-              <a routerLink="/apps/calendar"><i class="feather icon-calendar"></i><p>Contabilità</p></a>
-              <a routerLink="/apps/email/inbox"><i class="feather icon-mail"></i><p>Email</p></a>
-              <a routerLink="/general/profile"><i class="feather icon-instagram"></i><p>Profilo</p></a>
+              <a routerLink="/apps/chat"><i class="feather icon-message-square"></i>
+                <p>Lista ordini</p>
+              </a>
+              <a routerLink="/apps/calendar"><i class="feather icon-calendar"></i>
+                <p>Contabilità</p>
+              </a>
+              <a routerLink="/apps/email/inbox"><i class="feather icon-mail"></i>
+                <p>Email</p>
+              </a>
+              <a routerLink="/general/profile"><i class="feather icon-instagram"></i>
+                <p>Profilo</p>
+              </a>
             </div>
           </div>
           <div class="dropdown-footer d-flex align-items-center justify-content-center">
@@ -198,7 +218,8 @@
               <img src="https://via.placeholder.com/80x80" alt="">
             </div>
             <div class="info text-center" *ngIf="connectedUser$ | async as userData">
-              <p class="name font-weight-bold mb-0">{{(userData.displayName) ? userData.displayName : 'Utente sconosciuto'}}</p>
+              <p class="name font-weight-bold mb-0">{{(userData.displayName) ? userData.displayName : 'Utente
+                sconosciuto'}}</p>
               <p class="email text-muted mb-3">{{userData.email}}</p>
             </div>
           </div>

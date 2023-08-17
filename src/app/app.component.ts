@@ -42,8 +42,4 @@ export class AppComponent implements OnInit {
       return activatedRoute;
     }
   }
-
-  switchLanguage(language: string) {
-    this.translate.use(language);
-  }
 }

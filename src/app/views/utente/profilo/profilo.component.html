@@ -3,10 +3,10 @@
     <div class="card mb-4">
       <div class="card-body text-center">
         <img [src]="ffuser.photoURL" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-        <h5 class="my-3">{{ffuser.displayName?ffuser.displayName:'profiloUtente.profilo.nome-set' | translate}}</h5>
-        <p class="text-muted mb-1">{{ffuser.ruolo?ffuser.ruolo:'profiloUtente.profilo.ruolo-set' | translate}}</p>
+        <h5 class="my-3">{{ffuser.displayName?ffuser.displayName:'profiloUtente.nome-set' | translate}}</h5>
+        <p class="text-muted mb-1">{{ffuser.ruolo?ffuser.ruolo:'profiloUtente.ruolo-set' | translate}}</p>
         <div class="d-flex justify-content-center mb-2">
-          <button type="button" class="btn btn-outline-primary ms-1">{{'profiloUtente.profilo.inviamessaggio' | translate}}</button>
+          <button type="button" class="btn btn-outline-primary ms-1">{{'profiloUtente.inviamessaggio' | translate}}</button>
         </div>
       </div>
     </div>
@@ -16,37 +16,37 @@
       <div class="card-body">
         <div class="row">
           <div class="col-sm-3">
-            <p class="mb-0">{{'profiloUtente.profilo.nome' | translate}}</p>
+            <p class="mb-0">{{'profiloUtente.nome' | translate}}</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">{{ffuser.displayName?ffuser.displayName:'profiloUtente.profilo.nome-set' | translate}}</p>
+            <p class="text-muted mb-0">{{ffuser.displayName?ffuser.displayName:'profiloUtente.nome-set' | translate}}</p>
           </div>
         </div>
         <hr>
         <div class="row">
           <div class="col-sm-3">
-            <p class="mb-0">{{'profiloUtente.profilo.email' | translate}}</p>
+            <p class="mb-0">{{'profiloUtente.email' | translate}}</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">{{ffuser.email?ffuser.email:'profiloUtente.profilo.email-set' | translate}}</p>
+            <p class="text-muted mb-0">{{ffuser.email?ffuser.email:'profiloUtente.email-set' | translate}}</p>
           </div>
         </div>
         <hr>
         <div class="row">
           <div class="col-sm-3">
-            <p class="mb-0">{{'profiloUtente.profilo.cellulare' | translate}}</p>
+            <p class="mb-0">{{'profiloUtente.cellulare' | translate}}</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">{{ffuser.cellulare?ffuser.cellulare:'profiloUtente.profilo.cellulare-set' | translate}}</p>
+            <p class="text-muted mb-0">{{ffuser.cellulare?ffuser.cellulare:'profiloUtente.cellulare-set' | translate}}</p>
           </div>
         </div>
         <hr>
         <div class="row">
           <div class="col-sm-3">
-            <p class="mb-0">{{'profiloUtente.profilo.indirizzo' | translate}}</p>
+            <p class="mb-0">{{'profiloUtente.indirizzo' | translate}}</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">{{ffuser.indirizzo?ffuser.indirizzo: 'profiloUtente.profilo.indirizzo-set' | translate}}</p>
+            <p class="text-muted mb-0">{{ffuser.indirizzo?ffuser.indirizzo: 'profiloUtente.indirizzo-set' | translate}}</p>
           </div>
         </div>
       </div>

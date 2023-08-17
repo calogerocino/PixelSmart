@@ -1,13 +1,15 @@
 {
-	"profiloUtente.profilo.cellulare": "Teléfono móvil",
-	"profiloUtente.profilo.cellulare-set": "Entrega a definir",
-	"profiloUtente.profilo.email": "E-mail",
-	"profiloUtente.profilo.email-set": "Correo electrónico para configurar",
-	"profiloUtente.profilo.indirizzo": "Dirección",
-	"profiloUtente.profilo.indirizzo-set": "Dirección a configurar",
-	"profiloUtente.profilo.inviamessaggio": "Enviar mensaje",
-	"profiloUtente.profilo.nome": "Nombre",
-	"profiloUtente.profilo.nome-set": "Nombre a configurar",
-	"profiloUtente.profilo.ruolo": "Papel",
-	"profiloUtente.profilo.ruolo-set": "Rol a establecer"
+	"generale.home": "Bienvenido a PixelSmart",
+	"generale.layout.lingua": "Español",
+	"profiloUtente.cellulare": "Teléfono móvil",
+	"profiloUtente.cellulare-set": "Entrega a definir",
+	"profiloUtente.email": "E-mail",
+	"profiloUtente.email-set": "Correo electrónico para configurar",
+	"profiloUtente.indirizzo": "Dirección",
+	"profiloUtente.indirizzo-set": "Dirección a configurar",
+	"profiloUtente.inviamessaggio": "Enviar mensaje",
+	"profiloUtente.nome": "Nombre",
+	"profiloUtente.nome-set": "Nombre a configurar",
+	"profiloUtente.ruolo": "Papel",
+	"profiloUtente.ruolo-set": "Rol a establecer"
 }

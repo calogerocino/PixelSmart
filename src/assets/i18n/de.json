@@ -1,13 +1,15 @@
 {
-	"profiloUtente.profilo.cellulare": "Handy",
-	"profiloUtente.profilo.cellulare-set": "Lieferung muss eingestellt werden",
-	"profiloUtente.profilo.email": "E-Mail",
-	"profiloUtente.profilo.email-set": "E-Mail zum Festlegen",
-	"profiloUtente.profilo.indirizzo": "Adresse",
-	"profiloUtente.profilo.indirizzo-set": "Adresse, die eingestellt werden soll",
-	"profiloUtente.profilo.inviamessaggio": "Nachricht senden",
-	"profiloUtente.profilo.nome": "Name",
-	"profiloUtente.profilo.nome-set": "Name, der festgelegt werden soll",
-	"profiloUtente.profilo.ruolo": "Rolle",
-	"profiloUtente.profilo.ruolo-set": "Zu setzende Rolle"
+	"generale.home": "Willkommen zu PixelSmart",
+	"generale.layout.lingua": "Deutsch",
+	"profiloUtente.cellulare": "Handy",
+	"profiloUtente.cellulare-set": "Lieferung muss eingestellt werden",
+	"profiloUtente.email": "E-Mail",
+	"profiloUtente.email-set": "E-Mail zum Festlegen",
+	"profiloUtente.indirizzo": "Adresse",
+	"profiloUtente.indirizzo-set": "Adresse, die eingestellt werden soll",
+	"profiloUtente.inviamessaggio": "Nachricht senden",
+	"profiloUtente.nome": "Name",
+	"profiloUtente.nome-set": "Name, der festgelegt werden soll",
+	"profiloUtente.ruolo": "Rolle",
+	"profiloUtente.ruolo-set": "Zu setzende Rolle"
 }

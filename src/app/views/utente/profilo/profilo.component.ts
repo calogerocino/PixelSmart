@@ -14,7 +14,6 @@ export class ProfiloComponent implements OnInit {
   ffuser: any;
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly authService: AuthService,
     private readonly userService: UserService // private readonly router: Router
   ) {}
 
