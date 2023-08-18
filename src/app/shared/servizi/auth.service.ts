@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription, map } from 'rxjs';
 import { autologout } from 'src/app/views/auth/state/auth.action';
 import { getUserlocalId } from 'src/app/views/auth/state/auth.selector';
+import { User2 } from './user';
 @Injectable({
   providedIn: 'root',
 })
@@ -54,6 +55,23 @@ export class AuthService {
       localId: data.localId,
       expirationDate: new Date(now.getDate() + Number(data.expiresIn) * 1000),
     };
+  }
+
+  SetUserData(user: any) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
+    const userData: User = {
+      localId: user.uid,
+      token: user.refreshToken,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+    };
+    return userRef.set(userData, {
+      merge: true,
+    });
   }
 
   getErrorMessage(message: string) {
@@ -129,7 +147,7 @@ export class AuthService {
         /* Chiama la funzione SendVerificaitonMail()  quando un nuovo utente si registra
         su e restituisce la promessa */
         this.SendVerificationMail();
-        // this.SetUserData(result.user);
+        this.SetUserData(result.user);
       })
       .catch((error) => {
         this.Toast.fire(error.message, '', 'error');
@@ -178,7 +196,7 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result) => {
         this.router.navigate(['/']);
-        // this.SetUserData(result.user);
+        this.SetUserData(result.user);
       })
       .catch((error) => {
         this.Toast.fire(error, '', 'error');
