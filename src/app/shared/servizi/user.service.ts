@@ -55,7 +55,7 @@ export class UserService {
   getFFUser(uid: string) {
     return new Promise<any>((resolve) => {
       this.afs
-        .collection('users', (ref) => ref.where('localiId', '==', uid))
+        .collection('users', (ref) => ref.where('localId', '==', uid))
         .valueChanges()
         .subscribe((users) => resolve(users));
     });
