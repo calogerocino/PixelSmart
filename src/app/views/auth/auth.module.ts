@@ -5,7 +5,6 @@ import { RegisterComponent } from "./register/register.component";
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { Routes, RouterModule } from "@angular/router";
 import { AuthComponent } from "./auth.component";
-import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { VerifyemailComponent } from './verifyemail/verifyemail.component';
@@ -52,8 +51,7 @@ const routes: Routes = [
     RegisterComponent,
     AuthComponent,
     ResetpasswordComponent,
-    VerifyemailComponent,
-    LoadingSpinnerComponent
+    VerifyemailComponent
   ],
   imports: [
     CommonModule,
