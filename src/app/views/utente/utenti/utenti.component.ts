@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/shared/servizi/auth.service';
 import { UserService } from 'src/app/shared/servizi/user.service';
 
 @Component({
@@ -11,7 +10,6 @@ export class UtentiComponent {
   fflist: any;
 
   constructor(
-    private readonly authService: AuthService,
     private readonly userService: UserService
   ) {
     this.userService.getFFList().subscribe((data) => {

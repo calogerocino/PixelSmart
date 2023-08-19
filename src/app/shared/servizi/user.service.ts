@@ -4,8 +4,8 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { User } from '../models/user.interface';
-import { Observable, map } from 'rxjs';
-import { AuthService } from './auth.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../app.state';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
 export class UserService {
   constructor(
     private readonly afs: AngularFirestore,
-    private readonly authService: AuthService
+    private readonly store: Store<AppState>
   ) {}
 
   /* Impostazione dei dati utente quando si accede con nome utente/password,
@@ -35,19 +35,6 @@ export class UserService {
     });
   }
 
-  GetUserDataFireBase(): Observable<User> {
-    const usersDocuments = this.afs.doc<User>(
-      `users/${this.authService.getUserFromLocalStorage().localId}`
-    );
-    return usersDocuments.snapshotChanges().pipe(
-      map((changes) => {
-        const data = changes.payload.data();
-        const id = changes.payload.id;
-        return { id, ...data };
-      })
-    );
-  }
-
   getFFList() {
     return this.afs.collection('users').snapshotChanges();
   }
@@ -60,4 +47,27 @@ export class UserService {
         .subscribe((users) => resolve(users));
     });
   }
+
+  async MergeDatiUtente(uid: string, m2: User): Promise<User> {
+    let m1 = await this.getFFUser(uid);
+    m1 = m1.reduce((acc, it) => [...acc, ...it]);
+    const user: User = {
+      email: m2.email,
+      token: m2.token,
+      localId: m2.localId,
+      expirationDate: m2.expirationDate,
+      displayName: m1.displayName,
+      photoURL: m1.photoURL,
+      emailVerified: m1.emailVerified,
+    };
+    return user;
+  }
+
+  async Searchuser(uid: string): Promise<User> {
+    let userS = await this.getFFUser(uid);
+    userS = userS.reduce((acc, it) => [...acc, ...it]);
+    return userS;
+  }
+
+
 }

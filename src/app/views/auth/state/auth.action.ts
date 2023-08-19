@@ -5,6 +5,8 @@ export const LOGIN_START = '[Auth] Login start';
 export const LOGIN_SUCCESS = '[Auth] Login Success';
 export const LOGIN_FAIL = '[Auth] Login Fail';
 export const AUTO_LOGIN_ACTION = '[Auth] Auto login';
+export const UPDATE_LOGIN_START = '[Auth] Update login';
+export const UPDATE_LOGIN_SUCCESS = '[Auth] Update login success';
 export const LOGOUT_ACTION = '[Auth] Logout';
 
 export const loginStart = createAction(
@@ -19,4 +21,11 @@ export const loginSuccess = createAction(
 
 export const autoLogin = createAction(AUTO_LOGIN_ACTION);
 export const autologout = createAction(LOGOUT_ACTION);
+
+export const updateLogin = createAction(UPDATE_LOGIN_START);
+export const updateLoginSuccess = createAction(
+  UPDATE_LOGIN_SUCCESS,
+  props<{ user: User; redirect: boolean }>()
+);
+
 export const dummyAction = createAction('[dummy action]');

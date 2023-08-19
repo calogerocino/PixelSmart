@@ -2,11 +2,12 @@
   <div class="col-lg-4">
     <div class="card mb-4">
       <div class="card-body text-center">
-        <img [src]="ffuser.photoURL" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+        <img [src]="ffuser?.photoURL" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
         <h5 class="my-3">{{ffuser.displayName?ffuser.displayName:'profiloUtente.nome-set' | translate}}</h5>
         <p class="text-muted mb-1">{{ffuser.ruolo?ffuser.ruolo:'profiloUtente.ruolo-set' | translate}}</p>
         <div class="d-flex justify-content-center mb-2">
-          <button type="button" class="btn btn-outline-primary ms-1">{{'profiloUtente.inviamessaggio' | translate}}</button>
+          <button type="button" class="btn btn-outline-primary ms-1">{{'profiloUtente.inviamessaggio' |
+            translate}}</button>
         </div>
       </div>
     </div>
@@ -14,41 +15,45 @@
   <div class="col-lg-8">
     <div class="card mb-4">
       <div class="card-body">
-        <div class="row">
-          <div class="col-sm-3">
-            <p class="mb-0">{{'profiloUtente.nome' | translate}}</p>
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label>
+              <p class="mb-0">{{'profiloUtente.nome' | translate}}</p>
+            </label>
+            <input type="text" class="form-control" formControlName="displayName" autocomplete="off"
+              placeholder="{{'profiloUtente.nome-set' | translate}}">
+            <div *ngIf="userForm.get('displayName').touched && !userForm.get('displayName').valid">
+              <div *ngIf="userForm.get('displayName').errors['required']">
+                {{'generale.errori.camporichiesto' | translate}}
+              </div>
+              <div *ngIf="userForm.get('displayName').errors['minlength']">
+                {{'generale.errori.caratteriminimi' | translate}} 6
+              </div>
+            </div>
+
+
+
           </div>
-          <div class="col-sm-9">
-            <p class="text-muted mb-0">{{ffuser.displayName?ffuser.displayName:'profiloUtente.nome-set' | translate}}</p>
+          <div class="mb-3">
+            <label>{{'profiloUtente.email' | translate}}</label>
+            <input type="text" class="form-control" formControlName="email" autocomplete="off"
+              placeholder="{{'profiloUtente.email-set' | translate}}" />
           </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-3">
-            <p class="mb-0">{{'profiloUtente.email' | translate}}</p>
+          <div class="mb-3">
+            <label>{{'profiloUtente.cellulare' | translate}}</label>
+            <input type="text" class="form-control" formControlName="cellulare" autocomplete="off"
+              placeholder="{{'profiloUtente.cellulare-set' | translate}}">
           </div>
-          <div class="col-sm-9">
-            <p class="text-muted mb-0">{{ffuser.email?ffuser.email:'profiloUtente.email-set' | translate}}</p>
+          <div class="mb-3">
+            <label>{{'profiloUtente.indirizzo' | translate}}</label>
+            <input type="text" class="form-control" formControlName="indirizzo" autocomplete="off"
+              placeholder="{{'generale.errori.nonsupportato' | translate}}">
           </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-3">
-            <p class="mb-0">{{'profiloUtente.cellulare' | translate}}</p>
+
+          <div class="my-3">
+            <button type="submit" class="btn btn-primary mr-0">{{'profiloUtente.aggiornaprofilo' | translate}}</button>
           </div>
-          <div class="col-sm-9">
-            <p class="text-muted mb-0">{{ffuser.cellulare?ffuser.cellulare:'profiloUtente.cellulare-set' | translate}}</p>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-3">
-            <p class="mb-0">{{'profiloUtente.indirizzo' | translate}}</p>
-          </div>
-          <div class="col-sm-9">
-            <p class="text-muted mb-0">{{ffuser.indirizzo?ffuser.indirizzo: 'profiloUtente.indirizzo-set' | translate}}</p>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>

@@ -1,4 +1,7 @@
 {
+	"generale.errori.camporichiesto": "El campo es obligatorio",
+	"generale.errori.caratteriminimi": "Número mínimo de caracteres:",
+	"generale.errori.nonsupportato": "No soportado",
 	"generale.home": "Bienvenido a PixelSmart",
 	"generale.layout.lingua": "Español",
 	"generale.layout.menu.catalogo.buonisconto": "Cupones",
@@ -34,6 +37,8 @@
 	"generale.layout.navbar.nuovenotifiche": "Nuevas Notificaciones",
 	"generale.layout.navbar.visualizzatutti": "Ver todo",
 	"generale.shared.modifica": "Editar",
+	"profiloUtente.aggiornaprofilo": "Actualización del perfil",
+	"profiloUtente.caricamentoimg": "Cargar imagen",
 	"profiloUtente.cellulare": "Teléfono móvil",
 	"profiloUtente.cellulare-set": "Entrega a definir",
 	"profiloUtente.email": "E-mail",
@@ -45,5 +50,10 @@
 	"profiloUtente.nome-set": "Nombre a configurar",
 	"profiloUtente.profilo": "Perfil",
 	"profiloUtente.ruolo": "Papel",
-	"profiloUtente.ruolo-set": "Rol a establecer"
+	"profiloUtente.ruolo-set": "Rol a establecer",
+	"tabella.head.Azioni": "Acciones",
+	"tabella.head.idlocale": "ID DE USUARIO",
+	"tabella.head.immagine": "Imagen",
+	"tabella.head.mailverificata": "Correo electrónico verificado",
+	"tabella.head.nome": "Nombre"
 }

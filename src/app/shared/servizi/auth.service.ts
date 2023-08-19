@@ -5,7 +5,7 @@ import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/app.state';
@@ -13,10 +13,9 @@ import { AuthResponseData } from '../models/AuthResponseData';
 import { User } from '../models/user.interface';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { autologout } from 'src/app/views/auth/state/auth.action';
-import { getUserlocalId } from 'src/app/views/auth/state/auth.selector';
-import { User2 } from './user';
+
 @Injectable({
   providedIn: 'root',
 })

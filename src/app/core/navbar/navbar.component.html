@@ -209,23 +209,25 @@
           </div>
         </div>
       </li>
-      <li class="nav-item nav-profile" ngbDropdown>
+      <li class="nav-item nav-profile" ngbDropdown *ngIf="connectedUser$ | async as userData">
         <a class="nav-link" ngbDropdownToggle id="profileDropdown">
-          <img src="https://via.placeholder.com/30x30" alt="profile">
+          <img [src]="userData.photoURL" alt="profile">
         </a>
         <div ngbDropdownMenu aria-labelledby="profileDropdown">
           <div class="dropdown-header d-flex flex-column align-items-center">
             <div class="figure mb-3">
-              <img src="https://via.placeholder.com/80x80" alt="">
+              <img [src]="userData.photoURL" alt="">
             </div>
-            <div class="info text-center" *ngIf="connectedUser$ | async as userData">
-              <p class="name font-weight-bold mb-0">{{(userData.displayName) ? userData.displayName : 'profiloUtente.nome-set' | translate}}</p>
-              <p class="email text-muted mb-3">{{userData.email}}</p>
+            <div class="info text-center">
+              <p class="name font-weight-bold mb-0">
+                {{userData.displayName?userData.displayName:'profiloUtente.nome-set' | translate}}</p>
+              <p class="email text-muted mb-3">{{userData.email?userData.email:'profiloUtente.email-set' | translate}}
+              </p>
             </div>
           </div>
           <div class="dropdown-body">
             <ul class="profile-nav p-0 pt-3">
-              <li class="nav-item" *ngIf="connectedUser$ | async as userData">
+              <li class="nav-item">
                 <a routerLink="/utente/profilo/{{userData.localId}}" class="nav-link">
                   <i class="feather icon-user"></i>
                   <span>{{'profiloUtente.profilo' | translate}}</span>

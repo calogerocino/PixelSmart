@@ -5,21 +5,22 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Immagine</th>
-          <th>Nome</th>
-          <th>Mail verificata</th>
-          <th>localId</th>
-          <th>Azioni</th>
+          <th>{{'tabella.head.immagine' | translate}}</th>
+          <th>{{'tabella.head.idlocale' | translate}}</th>
+          <th>{{'tabella.head.nome' | translate}}</th>
+          <th>{{'tabella.head.mailverificata' | translate}}</th>
+          <th>{{'tabella.head.Azioni' | translate}}</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let ffl of fflist">
           <td> <img [src]="ffl.ffdata.photoURL" alt=""></td>
+          <td>{{ ffl.id }}</td>
           <td>{{ ffl.ffdata.displayName }}</td>
           <td>{{ ffl.ffdata.emailVerified }}</td>
-          <td>{{ ffl.id }}</td>
           <td>
-            <a href="" class="btn btn-primary" [routerLink]="['/utente/profilo' , ffl.id]">{{'generale.shared.modifica' | translate}}</a>&nbsp;
+            <a href="" class="btn btn-primary" [routerLink]="['/utente/profilo' , ffl.id]">{{'generale.shared.modifica'
+              | translate}}</a>&nbsp;
           </td>
         </tr>
       </tbody>

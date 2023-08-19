@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UtenteComponent } from './utente.component';
 import { UtentiComponent } from './utenti/utenti.component';
@@ -33,6 +34,12 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [UtenteComponent, UtentiComponent, ProfiloComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), TranslateModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class UtenteModule {}
