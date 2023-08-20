@@ -18,6 +18,7 @@ export class ProfiloComponent implements OnInit {
   ffuser: any;
   user: User;
   userForm: FormGroup;
+  passwordForm: FormGroup;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -29,10 +30,11 @@ export class ProfiloComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const idu = params.get('id');
       this.getDatiUtenteID(idu);
+      this.createFormPassword();
     });
   }
 
-  createForm(
+  createFormUser(
     DisplayName: string,
     Email: string,
     Cellulare: string,
@@ -44,17 +46,37 @@ export class ProfiloComponent implements OnInit {
         Validators.minLength(6),
       ]),
       email: new FormControl(Email, [Validators.required, Validators.email]),
-      cellulare: new FormControl(Cellulare, [
+      cellulare: new FormControl({ value: Cellulare, disabled: true }, [
         Validators.required,
         Validators.minLength(10),
       ]),
-      indirizzo: new FormControl(Indirizzo),
+      indirizzo: new FormControl({ value: Indirizzo, disabled: true }),
+    });
+  }
+
+  createFormPassword() {
+    this.passwordForm = new FormGroup({
+      passwordold: new FormControl('', [Validators.minLength(10)]),
+      passwordnew: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(
+          /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
+        ),
+      ]),
+      passwordnewre: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(
+          /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
+        ),
+      ]),
     });
   }
 
   async getDatiUtenteID(idu: string) {
     this.ffuser = await this.userService.Searchuser(idu);
-    this.createForm(
+    this.createFormUser(
       this.ffuser.displayName,
       this.ffuser.email,
       this.ffuser.cellulare,
