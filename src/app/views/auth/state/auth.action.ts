@@ -8,6 +8,8 @@ export const AUTO_LOGIN_ACTION = '[Auth] Auto login';
 export const UPDATE_LOGIN_START = '[Auth] Update login';
 export const UPDATE_LOGIN_SUCCESS = '[Auth] Update login success';
 export const LOGOUT_ACTION = '[Auth] Logout';
+export const CHANGE_PASSWORD_START = '[Auth] Change password start';
+export const CHANGE_PASSWORD_SUCCESST = '[Auth] Change password success';
 
 export const loginStart = createAction(
   LOGIN_START,
@@ -18,6 +20,12 @@ export const loginSuccess = createAction(
   LOGIN_SUCCESS,
   props<{ user: User; redirect: boolean }>()
 );
+
+export const changePasswordStart = createAction(
+  CHANGE_PASSWORD_START,
+  props<{ token:string; password: string }>()
+);
+export const changePasswordSuccess = createAction(CHANGE_PASSWORD_SUCCESST);
 
 export const autoLogin = createAction(AUTO_LOGIN_ACTION);
 export const autologout = createAction(LOGOUT_ACTION);

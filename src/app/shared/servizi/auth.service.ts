@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/app.state';
 import { AuthResponseData } from '../models/AuthResponseData';
+import { ChangePasswordResponseData } from '../models/ChangePasswordResponseData';
 import { User } from '../models/user.interface';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -46,6 +47,16 @@ export class AuthService {
     );
   }
 
+  ChangePassword(
+    idToken: string,
+    password: string
+  ): Observable<ChangePasswordResponseData> {
+    return this.http.post<ChangePasswordResponseData>(
+      `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.firebase.apiKey}`,
+      { idToken, password, returnSecureToken: true }
+    );
+  }
+
   formatUser(data: AuthResponseData): User {
     const now = new Date();
     return {
@@ -79,6 +90,14 @@ export class AuthService {
         return 'Email non trovata';
       case 'INVALID_PASSWORD':
         return 'Password non valida';
+      case 'NOT_MATCHES_PASSWORD':
+        return 'Le password non corrispondono';
+      case 'INVALID_ID_TOKEN':
+        return 'Token non valido, rieffetua il login';
+      case 'WEAK_PASSWORD':
+        return 'La password è troppo debole';
+      case 'INVALID_REQ_TYPE':
+        return 'Richiesta non valida';
       default:
         return 'Errore sconosciuto, per favore riprova';
     }
@@ -133,7 +152,6 @@ export class AuthService {
   }
 
   //DA SISTEMAE CON NGRX
-
   checkAuth() {
     return this.afAuth.authState;
   }

@@ -53,7 +53,6 @@
 	"profiloUtente.nome": "Name",
 	"profiloUtente.nome-set": "Name, der festgelegt werden soll",
 	"profiloUtente.password": "Kennwort",
-	"profiloUtente.password-old": "Altes Passwort",
 	"profiloUtente.password-set": "Neues Passwort",
 	"profiloUtente.password-setre": "Neues Passwort wiederholen",
 	"profiloUtente.profilo": "Profil",

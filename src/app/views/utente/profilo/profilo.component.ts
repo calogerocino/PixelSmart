@@ -4,9 +4,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/app.state';
-import { Observable } from 'rxjs';
-import { getUser } from '../../auth/state/auth.selector';
+import { Observable, exhaustMap } from 'rxjs';
+import { getUser, getUserToken } from '../../auth/state/auth.selector';
 import { UserService } from 'src/app/shared/servizi/user.service';
+import { changePasswordStart } from '../../auth/state/auth.action';
+import {
+  setErrorMessage,
+  setLoadingSpinner,
+} from 'src/app/shared/store/shared.actions';
+import { getErrorMessage } from 'src/app/shared/store/shared.selectors';
+import { AuthService } from 'src/app/shared/servizi/auth.service';
 
 @Component({
   selector: 'app-profilo',
@@ -15,6 +22,9 @@ import { UserService } from 'src/app/shared/servizi/user.service';
 })
 export class ProfiloComponent implements OnInit {
   connectedUser$: Observable<User> = this.store.select(getUser);
+  errorMessage$: Observable<string | null> = this.store.select(getErrorMessage);
+  // token$: Observable<User> = this.store.select(getUserToken);
+
   ffuser: any;
   user: User;
   userForm: FormGroup;
@@ -23,14 +33,14 @@ export class ProfiloComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly store: Store<AppState>,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const idu = params.get('id');
       this.getDatiUtenteID(idu);
-      this.createFormPassword();
     });
   }
 
@@ -51,13 +61,11 @@ export class ProfiloComponent implements OnInit {
         Validators.minLength(10),
       ]),
       indirizzo: new FormControl({ value: Indirizzo, disabled: true }),
-    });
-  }
-
-  createFormPassword() {
-    this.passwordForm = new FormGroup({
-      passwordold: new FormControl('', [Validators.minLength(10)]),
-      passwordnew: new FormControl('', [
+      //PASSWORD
+      passwordold: new FormControl({ value: '', autocomplete: 'off' }, [
+        Validators.minLength(10),
+      ]),
+      passwordnew: new FormControl({ value: '', autocomplete: 'off' }, [
         Validators.required,
         Validators.minLength(8),
         Validators.pattern(
@@ -84,5 +92,29 @@ export class ProfiloComponent implements OnInit {
     );
   }
 
-  onSubmit() {}
+  onSubmit(event) {
+    if (event.submitter.name == 'changePassword') {
+      console.log(
+        this.userForm.value.passwordnew,
+        this.userForm.value.passwordnewre
+      );
+      if (
+        this.userForm.value.passwordnew == this.userForm.value.passwordnewre
+      ) {
+        const password: string = this.userForm.value.passwordnew;
+        let token: string = '';
+        this.store.dispatch(setLoadingSpinner({ status: true }));
+        this.connectedUser$.subscribe((data) => (token = data.token));
+        this.store.dispatch(changePasswordStart({ token, password }));
+      } else {
+        const ErrorMessage = this.authService.getErrorMessage(
+          'NOT_MATCHES_PASSWORD'
+        );
+        this.store.dispatch(setErrorMessage({ message: ErrorMessage }));
+        this.store.dispatch(setLoadingSpinner({ status: false }));
+      }
+    } else {
+      console.log('da implementare');
+    }
+  }
 }

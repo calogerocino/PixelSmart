@@ -3,6 +3,8 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import {
   autoLogin,
   autologout,
+  changePasswordStart,
+  changePasswordSuccess,
   loginStart,
   loginSuccess,
   updateLogin,
@@ -109,5 +111,31 @@ export class AuthEffects {
       );
     },
     { dispatch: false }
+  );
+
+  changePassword$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(changePasswordStart),
+      switchMap((action) => {
+        console.log('token auth effect', action.token);
+        return this.authService.ChangePassword(action.token, action.password).pipe(
+          map((data) => {
+            this.store.dispatch(setLoadingSpinner({ status: false }));
+            this.store.dispatch(setErrorMessage({ message: null }));
+            console.log('data auth effect', data);
+
+            return changePasswordSuccess();
+          }),
+          catchError((errResp) => {
+            this.store.dispatch(setLoadingSpinner({ status: false }));
+            console.log('errore', errResp.error.error.message);
+            const ErrorMessage = this.authService.getErrorMessage(
+              errResp.error.error.message
+            );
+            return of(setErrorMessage({ message: ErrorMessage }));
+          })
+        );
+      })
+    )
   );
 }

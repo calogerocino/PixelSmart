@@ -15,9 +15,9 @@
   <div class="col-lg-8">
     <div class="card mb-4">
       <div class="card-body">
-        <div class="row">
-          <div class="col-6">
-            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit($event)">
+          <div class="row">
+            <div class="col-6">
               <div class="mb-3">
                 <label>
                   <p class="mb-0">{{'profiloUtente.nome' | translate}}</p>
@@ -25,10 +25,12 @@
                 <input type="text" class="form-control form-group" formControlName="displayName" autocomplete="off"
                   placeholder="{{'profiloUtente.nome-set' | translate}}">
                 <div *ngIf="userForm.get('displayName').touched && !userForm.get('displayName').valid">
-                  <div class="alert alert-danger" role="alert" *ngIf="userForm.get('displayName').errors['required']">
-                    {{'generale.errori.camporichiesto' | translate}}</div>
-                  <div class="alert alert-danger" role="alert" *ngIf="userForm.get('displayName').errors['minlength']">
-                    {{'generale.errori.caratteriminimi' | translate}} 6</div>
+                  <p class="text-danger mt-1" *ngIf="userForm.get('displayName').errors['required']">
+                    <i class="feather icon-alert-circle"></i> {{'generale.errori.camporichiesto' | translate}}
+                  </p>
+                  <p class="text-danger mt-1" *ngIf="userForm.get('displayName').errors['minlength']">
+                    <i class="feather icon-alert-circle"></i> {{'generale.errori.caratteriminimi' | translate}} 8
+                  </p>
                 </div>
               </div>
               <div class="mb-3">
@@ -36,10 +38,12 @@
                 <input type="text" class="form-control form-group" formControlName="email" autocomplete="off"
                   placeholder="{{'profiloUtente.email-set' | translate}}" />
                 <div *ngIf="userForm.get('email').touched && !userForm.get('email').valid">
-                  <div class="alert alert-danger" role="alert" *ngIf="userForm.get('email').errors['required']">
-                    {{'generale.errori.camporichiesto' | translate}}</div>
-                  <div class="alert alert-danger" role="alert" *ngIf="userForm.get('email').errors['email']">
-                    {{'generale.errori.mailvalida' | translate}}</div>
+                  <p class="text-danger mt-1" *ngIf="userForm.get('email').errors['required']">
+                    <i class="feather icon-alert-circle"></i> {{'generale.errori.camporichiesto' | translate}}
+                  </p>
+                  <p class="text-danger mt-1" *ngIf="userForm.get('email').errors['email']">
+                    <i class="link-icon feather icon-alert-circle"></i> {{'generale.errori.mailvalida' | translate}}
+                  </p>
                 </div>
               </div>
               <div class="mb-3">
@@ -53,42 +57,41 @@
                   placeholder="{{'generale.errori.nonsupportato' | translate}}">
               </div>
               <div class="my-3">
-                <button type="submit" class="btn btn-primary mr-0">{{'profiloUtente.aggiornaprofilo' |
+                <button type="submit" class="btn btn-primary mr-0" name="changeUser">{{'profiloUtente.aggiornaprofilo' |
                   translate}}</button>
               </div>
-            </form>
-          </div>
-          <div class="col-6">
-            <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+            </div>
+            <div class="col-6">
               <div class="mb-3">
                 <label>
                   <p class="mb-0">{{'profiloUtente.password' | translate}}</p>
                 </label>
-
-                <input type="password" class="form-control form-group" formControlName="passwordold" autocomplete="off"
-                  placeholder="{{'profiloUtente.password-old' | translate}}">
-
-                <input type="password" class="form-control form-group" formControlName="passwordnew" autocomplete="off"
+                <input type="password" class="form-control form-group" formControlName="passwordnew"
                   placeholder="{{'profiloUtente.password-set' | translate}}">
                 <input type="password" class="form-control form-group" formControlName="passwordnewre"
-                  autocomplete="off" placeholder="{{'profiloUtente.password-setre' | translate}}">
-
-                <!-- <div *ngIf="userForm.get('passwordnew').touched && !userForm.get('passwordnew').valid">
-                  <div class="alert alert-danger" role="alert" *ngIf="userForm.get('passwordnew').errors['required']">
-                    {{'generale.errori.camporichiesto' | translate}}</div>
-                  <div class="alert alert-danger" role="alert" *ngIf="userForm.get('passwordnew').errors['pattern']">
-                    {{'generale.errori.passpatt' | translate}}</div>
-                  <div class="alert alert-danger" role="alert" *ngIf="userForm.get('passwordnew').errors['minlength']">
-                    {{'generale.errori.pass8car' | translate}}</div>
+                  placeholder="{{'profiloUtente.password-setre' | translate}}">
+                <div class="alert alert-danger" role="alert" *ngIf="errorMessage$ | async as error"><i
+                    class="feather icon-alert-circle"></i> {{error}}</div>
+                <!--<div *ngIf="userForm.get('passwordnew').touched && !userForm.get('passwordnew').valid">
+                  <p class="text-danger mt-1" *ngIf="userForm.get('passwordnew').errors['required']">
+                    <i class="feather icon-alert-circle"></i> {{'generale.errori.camporichiesto' | translate}}
+                  </p>
+                  <p class="text-danger mt-1" *ngIf="userForm.get('passwordnew').errors['pattern']">
+                    <i class="feather icon-alert-circle"></i> {{'generale.errori.passpatt' | translate}}
+                  </p>
+                  <p class="text-danger mt-1" *ngIf="userForm.get('passwordnew').errors['minlength']">
+                    <i class="feather icon-alert-circle"></i> {{'generale.errori.pass8car' | translate}}
+                  </p>
                 </div> -->
               </div>
               <div class="my-3">
-                <button type="submit" class="btn btn-primary mr-0">{{'profiloUtente.aggiornapassword' |
+                <button type="submit" class="btn btn-primary mr-0"
+                  name="changePassword">{{'profiloUtente.aggiornapassword' |
                   translate}}</button>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
