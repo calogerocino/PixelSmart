@@ -7,7 +7,10 @@ import { AppState } from 'src/app/shared/app.state';
 import { Observable, exhaustMap } from 'rxjs';
 import { getUser, getUserToken } from '../../auth/state/auth.selector';
 import { UserService } from 'src/app/shared/servizi/user.service';
-import { changePasswordStart } from '../../auth/state/auth.action';
+import {
+  changeInfoStart,
+  changePasswordStart,
+} from '../../auth/state/auth.action';
 import {
   setErrorMessage,
   setLoadingSpinner,
@@ -62,10 +65,8 @@ export class ProfiloComponent implements OnInit {
       ]),
       indirizzo: new FormControl({ value: Indirizzo, disabled: true }),
       //PASSWORD
-      passwordold: new FormControl({ value: '', autocomplete: 'off' }, [
-        Validators.minLength(10),
-      ]),
-      passwordnew: new FormControl({ value: '', autocomplete: 'off' }, [
+      passwordold: new FormControl('', [Validators.minLength(10)]),
+      passwordnew: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
         Validators.pattern(
@@ -93,19 +94,18 @@ export class ProfiloComponent implements OnInit {
   }
 
   onSubmit(event) {
+    const password: string = this.userForm.value.passwordnew;
+    const passwordnewre: string = this.userForm.value.passwordnewre;
+    const displayName: string = this.userForm.value.displayName;
+    const email: string = this.userForm.value.email;
+    const photoURL: string = '';
+    let idToken: string = '';
+    this.connectedUser$.subscribe((data) => (idToken = data.token));
+
     if (event.submitter.name == 'changePassword') {
-      console.log(
-        this.userForm.value.passwordnew,
-        this.userForm.value.passwordnewre
-      );
-      if (
-        this.userForm.value.passwordnew == this.userForm.value.passwordnewre
-      ) {
-        const password: string = this.userForm.value.passwordnew;
-        let token: string = '';
+      if (password == passwordnewre) {
         this.store.dispatch(setLoadingSpinner({ status: true }));
-        this.connectedUser$.subscribe((data) => (token = data.token));
-        this.store.dispatch(changePasswordStart({ token, password }));
+        this.store.dispatch(changePasswordStart({ idToken, password }));
       } else {
         const ErrorMessage = this.authService.getErrorMessage(
           'NOT_MATCHES_PASSWORD'
@@ -114,7 +114,12 @@ export class ProfiloComponent implements OnInit {
         this.store.dispatch(setLoadingSpinner({ status: false }));
       }
     } else {
-      console.log('da implementare');
+      if (displayName != '' || email != '') {
+        this.store.dispatch(setLoadingSpinner({ status: true }));
+        this.store.dispatch(
+          changeInfoStart({ idToken, displayName, email, photoURL })
+        );
+      }
     }
   }
 }

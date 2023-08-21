@@ -57,6 +57,18 @@ export class AuthService {
     );
   }
 
+  ChangeInfo(
+    idToken: string,
+    displayName: string,
+    email: string,
+    photoURL: string
+  ): Observable<ChangePasswordResponseData> {
+    return this.http.post<ChangePasswordResponseData>(
+      `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.firebase.apiKey}`,
+      { idToken, displayName, email, photoURL, returnSecureToken: true }
+    );
+  }
+
   formatUser(data: AuthResponseData): User {
     const now = new Date();
     return {
