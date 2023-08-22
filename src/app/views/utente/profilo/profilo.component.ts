@@ -4,8 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/shared/app.state';
-import { Observable, exhaustMap } from 'rxjs';
-import { getUser, getUserToken } from '../../auth/state/auth.selector';
+import { Observable } from 'rxjs';
+import { getUser } from '../../auth/state/auth.selector';
 import { UserService } from 'src/app/shared/servizi/user.service';
 import {
   changeInfoStart,
