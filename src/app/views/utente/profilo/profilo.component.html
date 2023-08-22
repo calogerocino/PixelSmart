@@ -70,7 +70,7 @@
                   placeholder="{{'profiloUtente.password-set' | translate}}">
                 <input type="password" class="form-control form-group" formControlName="passwordnewre"
                   placeholder="{{'profiloUtente.password-setre' | translate}}">
-                <div class="alert alert-danger" role="alert" *ngIf="errorMessage$ | async as error"><i
+                <div class="alert alert-danger" style="animation: horizontal-shaking 0.35s linear 0.2s;" role="alert" *ngIf="errorMessage$ | async as error"><i
                     class="feather icon-alert-circle"></i> {{error}}</div>
                 <!--<div *ngIf="userForm.get('passwordnew').touched && !userForm.get('passwordnew').valid">
                   <p class="text-danger mt-1" *ngIf="userForm.get('passwordnew').errors['required']">

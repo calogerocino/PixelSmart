@@ -28,7 +28,7 @@
                   <div>La password è obbligatoria</div>
                 </div>
               </div>
-              <p class="text-danger mt-1" *ngIf="errorMessage$ | async as error">>
+              <p class="text-danger mt-1" style="animation: horizontal-shaking 0.35s linear 0.2s;" *ngIf="errorMessage$ | async as error">
                 <i class="feather icon-alert-circle"></i> {{error}}
               </p>
               <div class="form-check form-check-flat form-check-primary">
