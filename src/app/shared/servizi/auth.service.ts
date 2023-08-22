@@ -109,12 +109,14 @@ export class AuthService {
         return 'Password non valida';
       case 'NOT_MATCHES_PASSWORD':
         return 'Le password non corrispondono';
+        case 'MISSING_PASSWORD':
+          return 'Inserisci una password.'
       case 'INVALID_ID_TOKEN':
         return 'Token non valido, rieffetua il login';
       case 'WEAK_PASSWORD':
         return 'La password è troppo debole';
       case 'INVALID_REQ_TYPE':
-        return 'Richiesta non valida';
+        return 'Richiesta non valida';;
       default:
         return 'Errore sconosciuto, per favore riprova';
     }
