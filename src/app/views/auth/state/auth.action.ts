@@ -32,10 +32,8 @@ export const changePasswordSuccess = createAction(CHANGE_PASSWORD_SUCCESST);
 export const changeInfoStart = createAction(
   CHANGE_INFO_START,
   props<{
-    idToken: string;
-    displayName: string;
-    email: string;
-    photoURL: string;
+    localId: string;
+    value: User
   }>()
 );
 export const changeInfoSuccess = createAction(CHANGE_INFO_SUCCESST);

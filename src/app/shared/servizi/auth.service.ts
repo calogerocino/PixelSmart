@@ -69,6 +69,8 @@ export class AuthService {
     );
   }
 
+
+
   formatUser(data: AuthResponseData): User {
     const now = new Date();
     return {
@@ -84,12 +86,15 @@ export class AuthService {
       `users/${user.uid}`
     );
     const userData: User = {
-      localId: user.uid,
-      token: user.refreshToken,
       email: user.email,
+      token: user.refreshToken,
+      localId: user.uid,
+      expirationDate: user.expirationDate,
       displayName: user.displayName,
       photoURL: user.photoURL,
+      ruolo: user.ruolo,
       emailVerified: user.emailVerified,
+      cellulare: user.cellulare,
     };
     return userRef.set(userData, {
       merge: true,

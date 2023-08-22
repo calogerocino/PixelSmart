@@ -98,9 +98,18 @@ export class ProfiloComponent implements OnInit {
     const passwordnewre: string = this.userForm.value.passwordnewre;
     const displayName: string = this.userForm.value.displayName;
     const email: string = this.userForm.value.email;
-    const photoURL: string = '';
+    let photoURL: string = '';
     let idToken: string = '';
-    this.connectedUser$.subscribe((data) => (idToken = data.token));
+    let localId: string = '';
+    let emailVerified: boolean = false;
+    this.connectedUser$.subscribe(
+      (data) => (
+        (idToken = data.token),
+        (localId = data.localId),
+        (photoURL = data.photoURL),
+        (emailVerified = data.emailVerified)
+      )
+    );
 
     if (event.submitter.name == 'changePassword') {
       if (password == passwordnewre) {
@@ -115,10 +124,18 @@ export class ProfiloComponent implements OnInit {
       }
     } else {
       if (displayName != '' || email != '') {
+        const value: User = {
+          email: email,
+          token: idToken,
+          localId: localId,
+          displayName: displayName,
+          photoURL: photoURL,
+          ruolo: 'admin',
+          emailVerified: emailVerified,
+          cellulare: '',
+        };
         this.store.dispatch(setLoadingSpinner({ status: true }));
-        this.store.dispatch(
-          changeInfoStart({ idToken, displayName, email, photoURL })
-        );
+        this.store.dispatch(changeInfoStart({ localId, value }));
       }
     }
   }

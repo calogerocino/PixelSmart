@@ -24,6 +24,7 @@ import { AppState } from 'src/app/shared/app.state';
 import { of } from 'rxjs';
 import { UserService } from 'src/app/shared/servizi/user.service';
 import { getUser, getUserlocalId } from './auth.selector';
+import { User } from 'src/app/shared/models/user.interface';
 
 @Injectable()
 export class AuthEffects {
@@ -141,10 +142,13 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(changeInfoStart),
       switchMap((action) => {
-        return this.authService.ChangeInfo(action.idToken, action.displayName, action.email, action.photoURL).pipe(
+        // const user = this.userService.formatUser(action.value);
+        return this.userService.updateUserInfo(action.localId, action.value).pipe(
           map((data) => {
             this.store.dispatch(setLoadingSpinner({ status: false }));
             this.store.dispatch(setErrorMessage({ message: null }));
+            // this.authService.setUserInLocalStorage(user);
+            this.store.dispatch(updateLogin());
             return changeInfoSuccess();
           }),
           catchError((errResp) => {

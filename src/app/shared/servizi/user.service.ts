@@ -6,6 +6,7 @@ import {
 import { User } from '../models/user.interface';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.state';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -48,6 +49,17 @@ export class UserService {
     });
   }
 
+  updateUserInfo(_id: string, value: User) {
+   return from(this.afs.doc(`users/${_id}`).update(value));
+  }
+
+  // formatUser(data: User): User {
+  //   const now = new Date();
+  //   return {
+
+  //   };
+  // }
+
   async MergeDatiUtente(uid: string, m2: User): Promise<User> {
     let m1 = await this.getFFUser(uid);
     m1 = m1.reduce((acc, it) => [...acc, ...it]);
@@ -68,6 +80,4 @@ export class UserService {
     userS = userS.reduce((acc, it) => [...acc, ...it]);
     return userS;
   }
-
-
 }

@@ -8,5 +8,4 @@ export interface User {
   ruolo?: string;
   emailVerified?: boolean;
   cellulare?: string;
-  indirizzo?: string;
 }
