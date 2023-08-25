@@ -26,7 +26,6 @@ import { AuthService } from 'src/app/shared/servizi/auth.service';
 export class ProfiloComponent implements OnInit {
   connectedUser$: Observable<User> = this.store.select(getUser);
   errorMessage$: Observable<string | null> = this.store.select(getErrorMessage);
-  // token$: Observable<User> = this.store.select(getUserToken);
 
   ffuser: any;
   user: User;
