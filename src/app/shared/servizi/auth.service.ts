@@ -69,8 +69,6 @@ export class AuthService {
     );
   }
 
-
-
   formatUser(data: AuthResponseData): User {
     const now = new Date();
     return {
@@ -109,14 +107,14 @@ export class AuthService {
         return 'Password non valida';
       case 'NOT_MATCHES_PASSWORD':
         return 'Le password non corrispondono';
-        case 'MISSING_PASSWORD':
-          return 'Inserisci una password.'
+      case 'MISSING_PASSWORD':
+        return 'Inserisci una password.';
       case 'INVALID_ID_TOKEN':
         return 'Token non valido, rieffetua il login';
       case 'WEAK_PASSWORD':
         return 'La password è troppo debole';
       case 'INVALID_REQ_TYPE':
-        return 'Richiesta non valida';;
+        return 'Richiesta non valida';
       default:
         return 'Errore sconosciuto, per favore riprova';
     }
@@ -129,12 +127,18 @@ export class AuthService {
   }
 
   runTimeoutInterval(user: User) {
-    const todaysDate = new Date().getTime();
-    const expirationDate = user.expirationDate.getTime();
-    const timeInterval = expirationDate - todaysDate;
+    let date = new Date().getTime();
+    let expireIn = new Date(user.expirationDate).getTime();
+    const expirationDate = expireIn + date
+    const timeInterval = expirationDate - date;
+
+    console.log('date', date);
+    console.log('expireIn', expireIn);
+    console.log('expirationDate', expirationDate);
+    console.log('timeInterval', timeInterval);
 
     setTimeout(() => {
-      // this.store.dispatch(autologout());
+      this.store.dispatch(autologout());
     }, timeInterval);
   }
 
