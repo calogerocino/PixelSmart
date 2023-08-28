@@ -76,6 +76,7 @@ export class AuthService {
       token: data.idToken,
       localId: data.localId,
       expirationDate: new Date(now.getDate() + Number(data.expiresIn) * 1000),
+      emailVerified: data.registered,
     };
   }
 
@@ -129,13 +130,8 @@ export class AuthService {
   runTimeoutInterval(user: User) {
     let date = new Date().getTime();
     let expireIn = new Date(user.expirationDate).getTime();
-    const expirationDate = expireIn + date
+    const expirationDate = expireIn + date;
     const timeInterval = expirationDate - date;
-
-    console.log('date', date);
-    console.log('expireIn', expireIn);
-    console.log('expirationDate', expirationDate);
-    console.log('timeInterval', timeInterval);
 
     setTimeout(() => {
       this.store.dispatch(autologout());
@@ -186,8 +182,8 @@ export class AuthService {
       .then((result) => {
         /* Chiama la funzione SendVerificaitonMail()  quando un nuovo utente si registra
         su e restituisce la promessa */
-        this.SendVerificationMail();
         this.SetUserData(result.user);
+        this.SendVerificationMail();
       })
       .catch((error) => {
         this.Toast.fire(error.message, '', 'error');

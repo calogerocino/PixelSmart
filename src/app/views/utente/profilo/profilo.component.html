@@ -48,7 +48,7 @@
               </div>
               <div class="mb-3">
                 <label>{{'profiloUtente.cellulare' | translate}}</label>
-                <input type="text" class="form-control" formControlName="cellulare" autocomplete="off"
+                <input type="number" class="form-control" formControlName="cellulare" autocomplete="off"
                   placeholder="{{'generale.errori.nonsupportato' | translate}}">
               </div>
               <div class="mb-3">
@@ -70,8 +70,8 @@
                   placeholder="{{'profiloUtente.password-set' | translate}}">
                 <input type="password" class="form-control form-group" formControlName="passwordnewre"
                   placeholder="{{'profiloUtente.password-setre' | translate}}">
-                <div class="alert alert-danger" style="animation: horizontal-shaking 0.35s linear 0.2s;" role="alert" *ngIf="errorMessage$ | async as error"><i
-                    class="feather icon-alert-circle"></i> {{error}}</div>
+                <div class="alert alert-danger" style="animation: horizontal-shaking 0.35s linear 0.2s;" role="alert"
+                  *ngIf="errorMessage$ | async as error"><i class="feather icon-alert-circle"></i> {{error}}</div>
                 <!--<div *ngIf="userForm.get('passwordnew').touched && !userForm.get('passwordnew').valid">
                   <p class="text-danger mt-1" *ngIf="userForm.get('passwordnew').errors['required']">
                     <i class="feather icon-alert-circle"></i> {{'generale.errori.camporichiesto' | translate}}
@@ -88,6 +88,17 @@
                 <button type="submit" class="btn btn-primary mr-0"
                   name="changePassword">{{'profiloUtente.aggiornapassword' |
                   translate}}</button>
+              </div>
+
+              <div class="mb-3">
+                <label>
+                  <p class="mb-0">{{'tabella.head.mailverificata' | translate}}</p>
+                </label>
+                <label class="form-control">
+                  <input type="checkbox" name="checkbox" formControlName="emailverified" />
+                  {{(emailVerifiedForm ?'tabella.head.mailverificata' : 'profiloUtente.mailnonverificata')
+                  | translate}}
+                </label>
               </div>
             </div>
           </div>

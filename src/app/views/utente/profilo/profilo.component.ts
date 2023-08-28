@@ -26,7 +26,8 @@ import { AuthService } from 'src/app/shared/servizi/auth.service';
 export class ProfiloComponent implements OnInit {
   connectedUser$: Observable<User> = this.store.select(getUser);
   errorMessage$: Observable<string | null> = this.store.select(getErrorMessage);
-
+  localId: string = '';
+  emailVerifiedForm: boolean = false;
   ffuser: any;
   user: User;
   userForm: FormGroup;
@@ -41,8 +42,8 @@ export class ProfiloComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      const idu = params.get('id');
-      this.getDatiUtenteID(idu);
+      this.localId = params.get('id');
+      this.getDatiUtenteID(this.localId);
     });
   }
 
@@ -50,6 +51,7 @@ export class ProfiloComponent implements OnInit {
     DisplayName: string,
     Email: string,
     Cellulare: string,
+    EmailVerified: boolean,
     Indirizzo: string
   ) {
     this.userForm = new FormGroup({
@@ -58,11 +60,12 @@ export class ProfiloComponent implements OnInit {
         Validators.minLength(6),
       ]),
       email: new FormControl(Email, [Validators.required, Validators.email]),
-      cellulare: new FormControl({ value: Cellulare, disabled: true }, [
+      cellulare: new FormControl(Cellulare, [
         Validators.required,
         Validators.minLength(10),
       ]),
       indirizzo: new FormControl({ value: Indirizzo, disabled: true }),
+      emailverified: new FormControl({ value: EmailVerified, disabled: true }),
       //PASSWORD
       passwordold: new FormControl('', [Validators.minLength(10)]),
       passwordnew: new FormControl('', [
@@ -84,10 +87,12 @@ export class ProfiloComponent implements OnInit {
 
   async getDatiUtenteID(idu: string) {
     this.ffuser = await this.userService.Searchuser(idu);
+    this.emailVerifiedForm = this.ffuser.emailVerified;
     this.createFormUser(
       this.ffuser.displayName,
       this.ffuser.email,
       this.ffuser.cellulare,
+      this.ffuser.emailVerified,
       ''
     );
   }
@@ -97,17 +102,13 @@ export class ProfiloComponent implements OnInit {
     const passwordnewre: string = this.userForm.value.passwordnewre;
     const displayName: string = this.userForm.value.displayName;
     const email: string = this.userForm.value.email;
+    const cellulare: string = this.userForm.value.cellulare;
+    const localId = this.localId;
     let photoURL: string = '';
     let idToken: string = '';
-    let localId: string = '';
     let emailVerified: boolean = false;
     this.connectedUser$.subscribe(
-      (data) => (
-        (idToken = data.token),
-        (localId = data.localId),
-        (photoURL = data.photoURL),
-        (emailVerified = data.emailVerified)
-      )
+      (data) => ((idToken = data.token), (photoURL = data.photoURL))
     );
 
     if (event.submitter.name == 'changePassword') {
@@ -131,7 +132,7 @@ export class ProfiloComponent implements OnInit {
           photoURL: photoURL,
           ruolo: 'admin',
           emailVerified: emailVerified,
-          cellulare: '',
+          cellulare: cellulare,
         };
         this.store.dispatch(setLoadingSpinner({ status: true }));
         this.store.dispatch(changeInfoStart({ localId, value }));

@@ -23,6 +23,8 @@ export const loginSuccess = createAction(
   props<{ user: User; redirect: boolean }>()
 );
 
+export const loginFail = createAction(LOGIN_FAIL);
+
 export const changePasswordStart = createAction(
   CHANGE_PASSWORD_START,
   props<{ idToken: string; password: string }>()
@@ -33,7 +35,7 @@ export const changeInfoStart = createAction(
   CHANGE_INFO_START,
   props<{
     localId: string;
-    value: User
+    value: User;
   }>()
 );
 export const changeInfoSuccess = createAction(CHANGE_INFO_SUCCESST);
